@@ -8,13 +8,13 @@ main:
     url: /#about
     weight: 10
   - name: Posts
-    url: /blog/
+    url: /posts/
     weight: 20
   - name: Publications
-    url: /#publications
+    url: /publication/
     weight: 30
   - name: Games
-    url: /#games
+    url: /games/
     weight: 40
   - name: Contact
     url: /#contact

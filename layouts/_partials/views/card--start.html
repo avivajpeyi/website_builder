@@ -1,0 +1,24 @@
+{{/* Override HugoBlox card grid to honor design.columns */}}
+{{ $columns := .config.columns | default 2 | int }}
+{{ $len := .config.len | default 0 | int }}
+
+{{ $grid_cols := "grid-cols-1" }}
+{{ $max_width := "max-w-[65ch]" }}
+
+{{ if ge $columns 2 }}
+  {{ $grid_cols = "grid-cols-1 md:grid-cols-2" }}
+  {{ $max_width = "max-w-screen-lg" }}
+{{ end }}
+{{ if ge $columns 3 }}
+  {{ $grid_cols = "grid-cols-1 md:grid-cols-2 lg:grid-cols-3" }}
+  {{ $max_width = "max-w-screen-xl" }}
+{{ end }}
+{{ if ge $columns 4 }}
+  {{ $grid_cols = "grid-cols-1 md:grid-cols-2 lg:grid-cols-4" }}
+  {{ $max_width = "max-w-screen-2xl" }}
+{{ end }}
+{{ if eq $len 1 }}
+  {{ $max_width = "max-w-[500px]" }}
+{{ end }}
+
+<div class="container {{ $max_width }} mx-auto grid {{ $grid_cols }} gap-6 my-5">

@@ -41,10 +41,10 @@ sections:
     id: selected-publications
     content:
       title: Selected Publications
-      text: Selected peer-reviewed articles and preprints.
+      text: 
       filters:
         folders:
-          - publications
+          - publication
     design:
       view: citation
       columns: 2

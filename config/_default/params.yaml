@@ -27,7 +27,7 @@ hugoblox:
     sticky: true
     align: center
     search: true
-    theme_toggle: true
+    theme_toggle: false
   footer:
     style: minimal
     language_switcher: true
@@ -39,6 +39,16 @@ hugoblox:
     toc:
       enable: true
     reading_time:
-      enable: true
+      enable: false
   search:
     enable: true
+
+  repository:
+    enable: true
+    url: "https://github.com/avivajpeyi/website_builder"
+    branch: main
+    content_dir: content
+
+  analytics:
+    google:
+      id: "G-736274XEVL"
