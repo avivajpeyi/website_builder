@@ -49,4 +49,4 @@ hugoblox:
     content_dir: content
   analytics:
     google:
-      id: "G-736274XEVL"
+      measurement_id: "G-736274XEVL"
