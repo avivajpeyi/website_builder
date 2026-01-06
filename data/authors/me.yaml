@@ -23,6 +23,9 @@ profiles:
     label: Email me
   - icon: academicons/google-scholar
     url: https://scholar.google.com/citations?user=hP-8RuUAAAAJ
+  - icon: academicons/orcid
+    url: https://orcid.org/0000-0002-4146-1132
+    label: ORCID
   - icon: brands/github
     url: https://github.com/avivajpeyi
   - icon: brands/gitlab

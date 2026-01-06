@@ -53,14 +53,13 @@ sections:
     content:
       title: Games & Experiments
       text: >-
-        I love participating in game jams and prototyping with Godot and Unity.
-        These projects blur art, physics, and play.
+        I prototype experimental games in Godot and Unity, primarily through game jams.
       filters:
         folders:
           - games
       count: 18
     design:
-      view: card
+      view: "card"
       fill_image: true
       columns: 3
   - block: markdown
