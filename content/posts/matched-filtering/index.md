@@ -100,27 +100,25 @@ For $\\lim {\Delta t \to 0}$, $\sum^{N}_{i=1} n_i^2$ turns into an integral:
 
 #### Autocorrelation function for Gaussian Noise 
 Additionally, as $\\lim {\Delta t \to 0}$, we can also get an expression for the _autocorrelation function_. 
-{{% callout note %}}
-**Autocorrelation Function:**
-
-The autocorrelation function is a tools used to find patterns in time-series data. There are two types:
-1. Ensemble autocorrelation: quantifies correclation between points after repeated trials
-2. Temporal autocorrelation: quantifies correlation between points separated by various time lags in the same time-series
-
-As points become more separated, typically the temporal autocorrelation function should go to 0 (since it is difficult to to forecast further into the future from a given set of data). 
-
-For a continuous-time signal $y(t)$ and a lag of $\tau$, the temporal autocorreclation $R^T_{yy}(\tau)$ is given by:
-$$ R^T_{yy}(\tau) = \int^{+\infty}_{-\infty} y(t) y^*(t-\tau)\ ,$$
-and the ensemble autocorrelation $R^E_{yy}(\tau)$ is given by:
-$$ R^E_{yy}(\tau) = \langle y(t)|y(t-\tau)\rangle. $$
-
-If the signal is _erodic_ (ie the signal's statistical properties can be deduced from a long set of random samples), then 
-$$ R^T_{yy}(\tau) =\lim_{T\to \infty} \frac{1}{T} \int^{T}_{0} y(t) y^*(t-\tau)dt = R^E_{yy}(\tau) .$$
-
-Finally, note that the units ot $R$ are that of power! Hence, this can be used in the calculation of
-a power spectral density.
-
-{{% /callout %}}
+> [!NOTE]
+> **Autocorrelation Function:**
+>
+> The autocorrelation function is a tools used to find patterns in time-series data. There are two types:
+> 1. Ensemble autocorrelation: quantifies correclation between points after repeated trials
+> 2. Temporal autocorrelation: quantifies correlation between points separated by various time lags in the same time-series
+>
+> As points become more separated, typically the temporal autocorrelation function should go to 0 (since it is difficult to to forecast further into the future from a given set of data). 
+>
+> For a continuous-time signal $y(t)$ and a lag of $\tau$, the temporal autocorreclation $R^T_{yy}(\tau)$ is given by:
+> $$ R^T_{yy}(\tau) = \int^{+\infty}_{-\infty} y(t) y^*(t-\tau)\ ,$$
+> and the ensemble autocorrelation $R^E_{yy}(\tau)$ is given by:
+> $$ R^E_{yy}(\tau) = \langle y(t)|y(t-\tau)\rangle. $$
+>
+> If the signal is _erodic_ (ie the signal's statistical properties can be deduced from a long set of random samples), then 
+> $$ R^T_{yy}(\tau) =\lim_{T\to \infty} \frac{1}{T} \int^{T}_{0} y(t) y^*(t-\tau)dt = R^E_{yy}(\tau) .$$
+>
+> Finally, note that the units ot $R$ are that of power! Hence, this can be used in the calculation of
+> a power spectral density.
 
 At $\\lim {\Delta t \to 0}$, the autocorrelation function for $n(t)$ becomes
 \begin{equation} \label{eq:gauss_autocorrelation_temporal}
@@ -158,20 +156,18 @@ The one-sided power spectral density $\text{PSD}(f)$ (of a signal $n(t)$) is def
 \end{split}
 \end{equation}
 
-{{% callout note %}}
-**Derivation of the above PSD equation** (_taken from Mike Lau's master's thesis_)
-\begin{equation} \label{eq:psd_derivation}
-\begin{split}
-\mathcal{F}(R_{nn}(t)))  &= \langle \tilde{n}^*(f) \tilde{n}(f')\rangle\\\\
-                 &= \iint^{\infty}_{-\infty} \langle {n}(t) {n}(t')\rangle e^{-2\pi i (ft-f't')} dt dt'\\\\
-                 &{t'\to t+t'}\\\\
-                 &=\iint^{\infty}_{-\infty} \langle {n}(t) {n}(t+t')\rangle e^{-2\pi i(f-f')t}  e^{-2\pi if't'}  dt dt'\\\\
-                 &=\int^{\infty}_{-\infty} \langle {n}(t) {n}(t+t')\rangle e^{-2\pi if't'} dt' \delta(f-f') \\\\
-                 &= \frac{1}{2}\text{PSD}(f)\delta(f-f') \\\\                    
-\end{split}
-\end{equation}
-
-{{% /callout %}}
+> [!NOTE]
+> **Derivation of the above PSD equation** (_taken from Mike Lau's master's thesis_)
+> \begin{equation} \label{eq:psd_derivation}
+> \begin{split}
+> \mathcal{F}(R_{nn}(t)))  &= \langle \tilde{n}^*(f) \tilde{n}(f')\rangle\\\\
+>                  &= \iint^{\infty}_{-\infty} \langle {n}(t) {n}(t')\rangle e^{-2\pi i (ft-f't')} dt dt'\\\\
+>                  &{t'\to t+t'}\\\\
+>                  &=\iint^{\infty}_{-\infty} \langle {n}(t) {n}(t+t')\rangle e^{-2\pi i(f-f')t}  e^{-2\pi if't'}  dt dt'\\\\
+>                  &=\int^{\infty}_{-\infty} \langle {n}(t) {n}(t+t')\rangle e^{-2\pi if't'} dt' \delta(f-f') \\\\
+>                  &= \frac{1}{2}\text{PSD}(f)\delta(f-f') \\\\                    
+> \end{split}
+> \end{equation}
 
 In the case where $\\lim {\Delta t \to 0}$,
 $$R_{nn}(\tau)=\sigma^2\delta(\tau) = R_{nn}(f), $$ 
@@ -192,17 +188,16 @@ datapoints $\vec{n}$ from Guassian white noise is simplified to:
 \end{split}
 \end{equation}
 
-{{% callout note %}}
-**Noise Weighted Inner product of two time-series **
-The noise weighted inner product $(a,b)$ of two time-series $a(t)$ and $b(t)$ is defined as 
-\begin{equation} \label{eq:inner_producs}
-\begin{split}
-(a,b) &=  4 \text{Re} \int_0^{\infty} \frac{\tilde{a}(f) \tilde{b}^*(f)}{\text{PSD}(f)}df\\\\
-      &=  2  \int_{-\infty}}^{\infty} \frac{\tilde{a}(f) \tilde{b}^*(f)}{\text{PSD}(|f|)}df\\\\
-      &=     \int_{-\infty}}^{\infty} \frac{\tilde{a}(f) \tilde{b}^*(f) + \tilde{a}^*(f) \tilde{b}(f)}{\text{PSD}(|f|)}df,
-\end{split}
-\end{equation}
-{{% /callout %}}
+> [!NOTE]
+> **Noise Weighted Inner product of two time-series **
+> The noise weighted inner product $(a,b)$ of two time-series $a(t)$ and $b(t)$ is defined as 
+> \begin{equation} \label{eq:inner_producs}
+> \begin{split}
+> (a,b) &=  4 \text{Re} \int_0^{\infty} \frac{\tilde{a}(f) \tilde{b}^*(f)}{\text{PSD}(f)}df\\\\
+>       &=  2  \int_{-\infty}}^{\infty} \frac{\tilde{a}(f) \tilde{b}^*(f)}{\text{PSD}(|f|)}df\\\\
+>       &=     \int_{-\infty}}^{\infty} \frac{\tilde{a}(f) \tilde{b}^*(f) + \tilde{a}^*(f) \tilde{b}(f)}{\text{PSD}(|f|)}df,
+> \end{split}
+> \end{equation}
 where
 * $\text{PSD}(f) is the one-sided power spectral density of noise, and 
 * $\tilde{y}(-f) = \tilde{y}^*(f)$ .

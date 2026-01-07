@@ -72,9 +72,8 @@ echo "export LAL_DATA_PATH=/<path_to_wave_data_dir>" >> .bash_profile
 ````
 Copy the waveform data files and place them into this the `waveform_data/` dir
 
-{{% callout warning %}}
-Where do we get the waveform datafiles from again?
-{{% /callout %}}
+> [!WARNING]
+> Where do we get the waveform datafiles from again?
 
 ## Test installation steps with the following script
 

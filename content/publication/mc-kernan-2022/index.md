@@ -15,7 +15,9 @@ publishDate: '2026-01-06T20:56:47.784749Z'
 publication_types:
 - article-journal
 publication: '*Monthly Notices of the Royal Astronomical Society*'
-doi: 10.1093/mnras/stac1570
+hugoblox:
+  ids:
+    doi: 10.1093/mnras/stac1570
 links:
 - name: URL
   url: http://dx.doi.org/10.1093/mnras/stac1570

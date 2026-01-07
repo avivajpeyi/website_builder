@@ -1,0 +1,26 @@
+{{ $item := .item }}
+{{ $showDate := .config.show_date | default true }}
+{{ $displayDate := $item.Params.event_start | default $item.Date }}
+
+{{ $link := $item.RelPermalink }}
+{{ $target := "" }}
+{{ if $item.Params.external_link }}
+  {{ $link = $item.Params.external_link }}
+  {{ $target = "target=\"_blank\" rel=\"noopener\"" }}
+{{ end }}
+
+<li class="py-3 sm:py-4">
+  <div class="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
+    <a href="{{ $link }}" {{ $target | safeHTMLAttr }} class="text-base font-medium text-zinc-900 dark:text-zinc-100 hover:underline">
+      {{ $item.Title }}
+      {{ if $item.Params.external_link }}
+        {{ partial "functions/get_icon" (dict "name" "arrow-top-right-on-square" "attributes" "style=\"height: 1em;\" class=\"inline-flex h-4 w-4 ml-1 align-text-top\"") }}
+      {{ end }}
+    </a>
+    {{ if $showDate }}
+      <time class="text-sm text-zinc-500 dark:text-zinc-400 whitespace-nowrap" datetime="{{ time.Format "2006-01-02" $displayDate }}">
+        {{ time.Format (site.Params.hugoblox.locale.date_format | default ":date_long") $displayDate }}
+      </time>
+    {{ end }}
+  </div>
+</li>

@@ -12,7 +12,9 @@ publishDate: '2026-01-06T20:56:47.746601Z'
 publication_types:
 - manuscript
 publication: '*arXiv*'
-doi: 10.48550/ARXIV.2510.00533
+hugoblox:
+  ids:
+    doi: 10.48550/ARXIV.2510.00533
 tags:
 - General Relativity and Quantum Cosmology (gr-qc)
 - Instrumentation and Methods for Astrophysics (astro-ph.IM)

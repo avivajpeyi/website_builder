@@ -36,12 +36,11 @@ Today we will use [Hugo] and [wowchemy] to make a personal website (hosted on gi
 
 By the end of this workshop, you all should have a website but may need to spend more time customising it to your liking.
 
-{{% callout note %}}
-This will require some coding/usage of `git`. Here are some no coding/git alternatives:
-- https://sites.google.com/ (no coding necessary)
-- https://www.journoportfolio.com/
-- https://jsonresume.org/
-{{% /callout %}}
+> [!NOTE]
+> This will require some coding/usage of `git`. Here are some no coding/git alternatives:
+> - https://sites.google.com/ (no coding necessary)
+> - https://www.journoportfolio.com/
+> - https://jsonresume.org/
 
 
 One can now use [netlify](https://wowchemy.com/docs/getting-started/hugo-cms/) and [Hugo]'s "CMS" (whatever that stands for) to make a website without using git. However, I have not tried this yet, so I can't help you with it. :sweat_smile:
@@ -190,9 +189,8 @@ git commit -m 'init website'
 git push
 ```
 
-{{% callout note %}}
-Remember to 'activate' github pages in your repo settings (see [step 9](#9-enable-github-pages) above).
-{{% /callout %}}
+> [!NOTE]
+> Remember to 'activate' github pages in your repo settings (see [step 9](#9-enable-github-pages) above).
 
 
 

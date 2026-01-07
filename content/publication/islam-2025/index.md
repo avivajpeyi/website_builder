@@ -15,7 +15,9 @@ publishDate: '2026-01-06T20:56:47.753441Z'
 publication_types:
 - article-journal
 publication: '*Physical Review D*'
-doi: 10.1103/48ck-2fff
+hugoblox:
+  ids:
+    doi: 10.1103/48ck-2fff
 links:
 - name: URL
   url: http://dx.doi.org/10.1103/48ck-2fff

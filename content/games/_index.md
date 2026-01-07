@@ -15,7 +15,7 @@ sections:
           - games
       count: 0
     design:
-      view: card
+      view: card-minimal
       fill_image: true
       columns: 3
       show_date: false

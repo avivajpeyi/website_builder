@@ -12,7 +12,9 @@ publishDate: '2026-01-06T20:56:47.737182Z'
 publication_types:
 - manuscript
 publication: '*arXiv*'
-doi: 10.48550/ARXIV.2512.10283
+hugoblox:
+  ids:
+    doi: 10.48550/ARXIV.2512.10283
 tags:
 - Instrumentation and Methods for Astrophysics (astro-ph.IM)
 - Cosmology and Nongalactic Astrophysics (astro-ph.CO)

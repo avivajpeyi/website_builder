@@ -67,7 +67,9 @@ publishDate: '2026-01-06T20:56:47.803475Z'
 publication_types:
 - article-journal
 publication: '*Monthly Notices of the Royal Astronomical Society*'
-doi: 10.1093/mnras/staa2850
+hugoblox:
+  ids:
+    doi: 10.1093/mnras/staa2850
 links:
 - name: URL
   url: http://dx.doi.org/10.1093/mnras/staa2850

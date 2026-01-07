@@ -9,7 +9,9 @@ publishDate: '2026-01-06T20:56:47.772605Z'
 publication_types:
 - article-journal
 publication: '*The Astrophysical Journal*'
-doi: 10.3847/1538-4357/acbdf4
+hugoblox:
+  ids:
+    doi: 10.3847/1538-4357/acbdf4
 links:
 - name: URL
   url: http://dx.doi.org/10.3847/1538-4357/acbdf4

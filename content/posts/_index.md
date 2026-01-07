@@ -1,4 +1,4 @@
 ---
 title: Blog
-view: list
+view: list-lines
 ---

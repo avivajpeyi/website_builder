@@ -42,12 +42,11 @@ python -m venv pbilby_venv
 source pbilby_venv/bin/activate
 ```
 
-{{% callout note %}}
-**Choosing a dir for your venv**
-
-Your `venv` will be faster to boot-up if you make it in your `/home/` directory, rather than in `/fred/` (as the latter is on a network drive).
-However, `/home/` has a very small amount of storage space.
-{{% /callout %}}  
+> [!NOTE]
+> **Choosing a dir for your venv**
+>
+> Your `venv` will be faster to boot-up if you make it in your `/home/` directory, rather than in `/fred/` (as the latter is on a network drive).
+> However, `/home/` has a very small amount of storage space.  
 
 
 You will need to load the same modules every time you want to use the `pbilby_venv` environment. I recommend adding the following to your `.bashrc` file:

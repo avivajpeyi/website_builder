@@ -59,7 +59,7 @@ sections:
           - games
       count: 18
     design:
-      view: "card"
+      view: "card-minimal"
       fill_image: true
       columns: 3
   - block: markdown
