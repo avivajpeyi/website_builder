@@ -53,7 +53,7 @@ sections:
     content:
       title: Games & Experiments
       text: >-
-        A rotating peek at game jam builds and prototypes.
+        In my spare time, I work on game development and human–machine learning projects. This includes reinforcement learning in games and unconventional control schemes (e.g. webcam-based tracking).
       logo_folder: games
       cta:
         text: See all games on itch.io
