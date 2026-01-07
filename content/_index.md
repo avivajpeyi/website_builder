@@ -48,20 +48,20 @@ sections:
     design:
       view: citation
       columns: 2
-  - block: collection
+  - block: logos
     id: games
     content:
       title: Games & Experiments
       text: >-
-        I prototype experimental games in Godot and Unity, primarily through game jams.
-      filters:
-        folders:
-          - games
-      count: 18
+        A rotating peek at game jam builds and prototypes.
+      logo_folder: games
+      cta:
+        text: See all games on itch.io
+        url: https://avivajpeyi.itch.io/
     design:
-      view: "card-minimal"
-      fill_image: true
-      columns: 3
+      display_mode: carousel
+      show_pattern: true
+      scroll_speed: 0.4
   - block: markdown
     id: contact
     content:

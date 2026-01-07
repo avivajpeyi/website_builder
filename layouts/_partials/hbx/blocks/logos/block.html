@@ -1,0 +1,455 @@
+{{/* Hugo Blox: Logos Block */}}
+{{/* Documentation: https://hugoblox.com/blocks/ */}}
+{{/* License: https://github.com/HugoBlox/kit/blob/main/LICENSE.md */}}
+
+{{/* Initialise */}}
+{{ $page := .wcPage }}
+{{ $block := .wcBlock }}
+{{ $identifier := .wcIdentifier }}
+{{ $display_mode := $block.design.display_mode | default "grid" }}
+
+{{ $title := $block.content.title | emojify | $page.RenderString }}
+{{ $subtitle := $block.content.subtitle | emojify | $page.RenderString }}
+{{ $text := $block.content.text | emojify | $page.RenderString }}
+
+<div class="relative py-16 sm:py-20 lg:py-24 overflow-hidden">
+  {{/* Background Pattern */}}
+  {{ if $block.design.show_pattern }}
+  <div class="absolute inset-0 opacity-5">
+    <div class="absolute inset-0 bg-gradient-to-br from-primary-100 to-transparent dark:from-primary-900 dark:to-transparent"></div>
+  </div>
+  {{ end }}
+  
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    {{/* Section Header */}}
+    <div class="text-center max-w-3xl mx-auto mb-12">
+      {{ with $title }}
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white tracking-tight mb-4">
+        {{ . }}
+      </h2>
+      {{ end }}
+      
+      {{ with $subtitle }}
+      <p class="text-xl text-primary-600 dark:text-primary-400 font-medium mb-2">
+        {{ . }}
+      </p>
+      {{ end }}
+      
+      {{ with $text }}
+      <p class="text-lg text-gray-600 dark:text-gray-400">
+        {{ . }}
+      </p>
+      {{ end }}
+    </div>
+
+    {{/* Grid Display Mode */}}
+    {{ if eq $display_mode "grid" }}
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-8 lg:gap-12 items-center">
+      
+      {{/* Logo Items from Data */}}
+      {{ if $block.content.logos }}
+        {{ range $block.content.logos }}
+        <div class="group relative">
+          {{ $link := .url | default "#" }}
+          {{ $target := cond .external "_blank" "_self" }}
+          <a href="{{ $link }}" target="{{ $target }}" rel="{{ if .external }}noopener{{ end }}"
+             class="block p-4 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-all duration-300"
+             {{ with .name }}title="{{ . }}"{{ end }}>
+            <div class="relative">
+              {{/* Logo Image */}}
+              {{ if .image }}
+                {{ $img := resources.Get (printf "media/%s" .image) }}
+                {{ if $img }}
+                  {{ $isSVG := eq $img.MediaType.SubType "svg" }}
+                  {{ $isGIF := eq $img.MediaType.SubType "gif" }}
+                  {{ if and (not $isSVG) (not $isGIF) }}
+                    {{ $img = $img.Fit "280x140 webp" }}
+                  {{ end }}
+                  <img src="{{ $img.RelPermalink }}" 
+                       alt="{{ .name | default "Partner logo" }}"
+                       {{ if not $isSVG }}width="{{ $img.Width }}" height="{{ $img.Height }}"{{ end }}
+                       class="h-12 sm:h-14 lg:h-16 w-auto mx-auto object-contain filter grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300 group-hover:scale-110"
+                       loading="lazy">
+                {{ end }}
+              {{ end }}
+              
+              {{/* Tooltip on Hover */}}
+              {{ with .description }}
+              <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-gray-900 dark:bg-gray-700 text-white text-xs rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none whitespace-nowrap z-10">
+                {{ . }}
+                <div class="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-l-transparent border-r-4 border-r-transparent border-t-4 border-t-gray-900 dark:border-t-gray-700"></div>
+              </div>
+              {{ end }}
+            </div>
+          </a>
+        </div>
+        {{ end }}
+        
+      {{/* Logo Images from Folder (Legacy Support) */}}
+      {{ else if $block.content.logo_folder }}
+        {{ $images := resources.Match (printf "media/%s/*.{svg,png,jpg,jpeg,webp,gif}" $block.content.logo_folder) }}
+        {{ range $images }}
+        <div class="group relative">
+          <div class="block p-4 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-all duration-300">
+            {{ $image := . }}
+            {{ $isSVG := eq $image.MediaType.SubType "svg" }}
+            {{ $isGIF := eq $image.MediaType.SubType "gif" }}
+            {{ if and (not $isSVG) (not $isGIF) }}
+              {{ $image = $image.Fit "280x140 webp" }}
+            {{ end }}
+            <img src="{{ $image.RelPermalink }}" 
+                 alt="Game media"
+                 {{ if not $isSVG }}width="{{ $image.Width }}" height="{{ $image.Height }}"{{ end }}
+                 class="h-12 sm:h-14 lg:h-16 w-auto mx-auto object-contain filter grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300 hover:scale-110"
+                 loading="lazy">
+          </div>
+        </div>
+        {{ end }}
+      {{ end }}
+    </div>
+    
+    {{/* Carousel Display Mode */}}
+    {{ else if eq $display_mode "carousel" }}
+    <div class="relative">
+      {{ $items := slice }}
+      {{ if $block.content.logos }}
+        {{ $items = $block.content.logos }}
+      {{ else if $block.content.logo_folder }}
+        {{ $items = resources.Match (printf "media/%s/*.{svg,png,jpg,jpeg,webp,gif}" $block.content.logo_folder) }}
+      {{ end }}
+      {{ $count := len $items }}
+      {{ $half := div (add $count 1) 2 }}
+      {{ $row1 := first $half $items }}
+      {{ $row2 := after $half $items }}
+      {{ if eq (len $row2) 0 }}
+        {{ $row2 = $row1 }}
+      {{ end }}
+      {{ $speed := $block.design.scroll_speed | default 0.4 }}
+      {{ $speed_alt := $block.design.scroll_speed_alt | default (mul $speed 1.25) }}
+
+      <div class="space-y-6">
+        <div
+          class="carousel-track flex space-x-12 lg:space-x-16 overflow-x-auto"
+          data-carousel-track="{{ $identifier }}"
+          data-scroll-speed="{{ $speed }}"
+          aria-label="{{ $title | default "Carousel" }}"
+        >
+          {{/* First row */}}
+          {{ range $row1 }}
+          {{ $item := . }}
+          <div class="flex-shrink-0">
+            {{ if reflect.IsMap $item }}
+              {{ $image := index $item "image" }}
+              {{ if $image }}
+                {{ $img := resources.Get (printf "media/%s" $image) }}
+                {{ if $img }}
+                  {{ $isSVG := eq $img.MediaType.SubType "svg" }}
+                  {{ $isGIF := eq $img.MediaType.SubType "gif" }}
+                  {{ if and (not $isSVG) (not $isGIF) }}
+                    {{ $img = $img.Fit "280x140 webp" }}
+                  {{ end }}
+                  <img src="{{ $img.RelPermalink }}"
+                       alt="{{ index $item "name" | default "Partner logo" }}"
+                       {{ if not $isSVG }}width="{{ $img.Width }}" height="{{ $img.Height }}"{{ end }}
+                       class="h-36 w-64 object-contain opacity-100"
+                       loading="lazy">
+                {{ end }}
+              {{ end }}
+            {{ else if $item.RelPermalink }}
+              {{ $img := $item }}
+              {{ $isSVG := eq $img.MediaType.SubType "svg" }}
+              {{ $isGIF := eq $img.MediaType.SubType "gif" }}
+              {{ if and (not $isSVG) (not $isGIF) }}
+                {{ $img = $img.Fit "280x140 webp" }}
+              {{ end }}
+              <img src="{{ $img.RelPermalink }}"
+                   alt="Game media"
+                   {{ if not $isSVG }}width="{{ $img.Width }}" height="{{ $img.Height }}"{{ end }}
+                   class="h-36 w-64 object-contain opacity-100"
+                   loading="lazy">
+            {{ end }}
+          </div>
+          {{ end }}
+
+          {{/* Duplicate for seamless loop */}}
+          {{ range $row1 }}
+          {{ $item := . }}
+          <div class="flex-shrink-0">
+            {{ if reflect.IsMap $item }}
+              {{ $image := index $item "image" }}
+              {{ if $image }}
+                {{ $img := resources.Get (printf "media/%s" $image) }}
+                {{ if $img }}
+                  {{ $isSVG := eq $img.MediaType.SubType "svg" }}
+                  {{ $isGIF := eq $img.MediaType.SubType "gif" }}
+                  {{ if and (not $isSVG) (not $isGIF) }}
+                    {{ $img = $img.Fit "280x140 webp" }}
+                  {{ end }}
+                  <img src="{{ $img.RelPermalink }}"
+                       alt="{{ index $item "name" | default "Partner logo" }}"
+                       {{ if not $isSVG }}width="{{ $img.Width }}" height="{{ $img.Height }}"{{ end }}
+                       class="h-36 w-64 object-contain opacity-100"
+                       loading="lazy">
+                {{ end }}
+              {{ end }}
+            {{ else if $item.RelPermalink }}
+              {{ $img := $item }}
+              {{ $isSVG := eq $img.MediaType.SubType "svg" }}
+              {{ $isGIF := eq $img.MediaType.SubType "gif" }}
+              {{ if and (not $isSVG) (not $isGIF) }}
+                {{ $img = $img.Fit "280x140 webp" }}
+              {{ end }}
+              <img src="{{ $img.RelPermalink }}"
+                   alt="Game media"
+                   {{ if not $isSVG }}width="{{ $img.Width }}" height="{{ $img.Height }}"{{ end }}
+                   class="h-36 w-64 object-contain opacity-100"
+                   loading="lazy">
+            {{ end }}
+          </div>
+          {{ end }}
+        </div>
+
+        <div
+          class="carousel-track flex space-x-12 lg:space-x-16 overflow-x-auto"
+          data-carousel-track="{{ $identifier }}"
+          data-scroll-speed="{{ $speed_alt }}"
+          aria-label="{{ $title | default "Carousel" }}"
+        >
+          {{/* Second row */}}
+          {{ range $row2 }}
+          {{ $item := . }}
+          <div class="flex-shrink-0">
+            {{ if reflect.IsMap $item }}
+              {{ $image := index $item "image" }}
+              {{ if $image }}
+                {{ $img := resources.Get (printf "media/%s" $image) }}
+                {{ if $img }}
+                  {{ $isSVG := eq $img.MediaType.SubType "svg" }}
+                  {{ $isGIF := eq $img.MediaType.SubType "gif" }}
+                  {{ if and (not $isSVG) (not $isGIF) }}
+                    {{ $img = $img.Fit "280x140 webp" }}
+                  {{ end }}
+                  <img src="{{ $img.RelPermalink }}"
+                       alt="{{ index $item "name" | default "Partner logo" }}"
+                       {{ if not $isSVG }}width="{{ $img.Width }}" height="{{ $img.Height }}"{{ end }}
+                       class="h-36 w-64 object-contain opacity-100"
+                       loading="lazy">
+                {{ end }}
+              {{ end }}
+            {{ else if $item.RelPermalink }}
+              {{ $img := $item }}
+              {{ $isSVG := eq $img.MediaType.SubType "svg" }}
+              {{ $isGIF := eq $img.MediaType.SubType "gif" }}
+              {{ if and (not $isSVG) (not $isGIF) }}
+                {{ $img = $img.Fit "280x140 webp" }}
+              {{ end }}
+              <img src="{{ $img.RelPermalink }}"
+                   alt="Game media"
+                   {{ if not $isSVG }}width="{{ $img.Width }}" height="{{ $img.Height }}"{{ end }}
+                   class="h-36 w-64 object-contain opacity-100"
+                   loading="lazy">
+            {{ end }}
+          </div>
+          {{ end }}
+
+          {{/* Duplicate for seamless loop */}}
+          {{ range $row2 }}
+          {{ $item := . }}
+          <div class="flex-shrink-0">
+            {{ if reflect.IsMap $item }}
+              {{ $image := index $item "image" }}
+              {{ if $image }}
+                {{ $img := resources.Get (printf "media/%s" $image) }}
+                {{ if $img }}
+                  {{ $isSVG := eq $img.MediaType.SubType "svg" }}
+                  {{ $isGIF := eq $img.MediaType.SubType "gif" }}
+                  {{ if and (not $isSVG) (not $isGIF) }}
+                    {{ $img = $img.Fit "280x140 webp" }}
+                  {{ end }}
+                  <img src="{{ $img.RelPermalink }}"
+                       alt="{{ index $item "name" | default "Partner logo" }}"
+                       {{ if not $isSVG }}width="{{ $img.Width }}" height="{{ $img.Height }}"{{ end }}
+                       class="h-36 w-64 object-contain opacity-100"
+                       loading="lazy">
+                {{ end }}
+              {{ end }}
+            {{ else if $item.RelPermalink }}
+              {{ $img := $item }}
+              {{ $isSVG := eq $img.MediaType.SubType "svg" }}
+              {{ $isGIF := eq $img.MediaType.SubType "gif" }}
+              {{ if and (not $isSVG) (not $isGIF) }}
+                {{ $img = $img.Fit "280x140 webp" }}
+              {{ end }}
+              <img src="{{ $img.RelPermalink }}"
+                   alt="Game media"
+                   {{ if not $isSVG }}width="{{ $img.Width }}" height="{{ $img.Height }}"{{ end }}
+                   class="h-36 w-64 object-contain opacity-100"
+                   loading="lazy">
+            {{ end }}
+          </div>
+          {{ end }}
+        </div>
+      </div>
+    </div>
+    
+    {{/* Marquee Display Mode */}}
+    {{ else if eq $display_mode "marquee" }}
+    <div class="relative">
+      <div class="overflow-hidden">
+        <div class="flex animate-marquee whitespace-nowrap">
+          {{ $items := slice }}
+          {{ if $block.content.logos }}
+            {{ $items = $block.content.logos }}
+          {{ else if $block.content.logo_folder }}
+            {{ $items = resources.Match (printf "media/%s/*.{svg,png,jpg,jpeg,webp,gif}" $block.content.logo_folder) }}
+          {{ end }}
+          {{ range $items }}
+          {{ $item := . }}
+          <div class="mx-8 inline-flex items-center">
+            {{ if reflect.IsMap $item }}
+              {{ $image := index $item "image" }}
+              {{ if $image }}
+                {{ $img := resources.Get (printf "media/%s" $image) }}
+                {{ if $img }}
+                  {{ $isSVG := eq $img.MediaType.SubType "svg" }}
+                  {{ $isGIF := eq $img.MediaType.SubType "gif" }}
+                  {{ if and (not $isSVG) (not $isGIF) }}
+                    {{ $img = $img.Fit "280x140 webp" }}
+                  {{ end }}
+                  <img src="{{ $img.RelPermalink }}" 
+                       alt="{{ index $item "name" | default "Partner logo" }}"
+                       {{ if not $isSVG }}width="{{ $img.Width }}" height="{{ $img.Height }}"{{ end }}
+                       class="h-14 lg:h-16 w-auto object-contain opacity-100"
+                       loading="lazy">
+                {{ end }}
+              {{ end }}
+            {{ else if $item.RelPermalink }}
+              {{ $img := $item }}
+              {{ $isSVG := eq $img.MediaType.SubType "svg" }}
+              {{ $isGIF := eq $img.MediaType.SubType "gif" }}
+              {{ if and (not $isSVG) (not $isGIF) }}
+                {{ $img = $img.Fit "280x140 webp" }}
+              {{ end }}
+              <img src="{{ $img.RelPermalink }}" 
+                   alt="Game media"
+                   {{ if not $isSVG }}width="{{ $img.Width }}" height="{{ $img.Height }}"{{ end }}
+                   class="h-14 lg:h-16 w-auto object-contain opacity-100"
+                   loading="lazy">
+            {{ end }}
+          </div>
+          {{ end }}
+        </div>
+      </div>
+    </div>
+    {{ end }}
+    
+    {{/* Call to Action */}}
+    {{ with $block.content.cta }}
+    <div class="mt-12 text-center">
+      <a href="{{ .url }}" 
+         class="inline-flex items-center px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-lg shadow hover:shadow-lg transition-all duration-300">
+        {{ .text }}
+        {{ with .icon }}
+        {{ partial "functions/get_icon" (dict "name" . "attributes" "class=\"ml-2 w-5 h-5\"") }}
+        {{ end }}
+      </a>
+    </div>
+    {{ end }}
+  </div>
+</div>
+
+{{/* Custom CSS for Animations */}}
+<style>
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+}
+
+.carousel-track {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  cursor: grab;
+  touch-action: pan-x;
+}
+
+.carousel-track::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel-track.is-dragging {
+  cursor: grabbing;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+</style>
+
+<script>
+(() => {
+  const tracks = document.querySelectorAll('[data-carousel-track="{{ $identifier }}"]');
+  if (!tracks.length) {
+    return;
+  }
+
+  const initTrack = (track) => {
+    const speedAttr = track.getAttribute('data-scroll-speed');
+    const speed = speedAttr ? parseFloat(speedAttr) : 0.4;
+    let isDragging = false;
+    let startX = 0;
+    let scrollStart = 0;
+
+    const step = () => {
+      if (!isDragging && !track.matches(':hover')) {
+        const half = track.scrollWidth / 2;
+        track.scrollLeft += speed;
+        if (track.scrollLeft >= half) {
+          track.scrollLeft -= half;
+        }
+      }
+      requestAnimationFrame(step);
+    };
+
+    track.addEventListener('pointerdown', (event) => {
+      isDragging = true;
+      track.classList.add('is-dragging');
+      startX = event.clientX;
+      scrollStart = track.scrollLeft;
+      track.setPointerCapture(event.pointerId);
+    });
+
+    track.addEventListener('pointermove', (event) => {
+      if (!isDragging) {
+        return;
+      }
+      const dx = event.clientX - startX;
+      track.scrollLeft = scrollStart - dx;
+    });
+
+    track.addEventListener('pointerup', (event) => {
+      isDragging = false;
+      track.classList.remove('is-dragging');
+      track.releasePointerCapture(event.pointerId);
+    });
+
+    track.addEventListener('pointerleave', () => {
+      isDragging = false;
+      track.classList.remove('is-dragging');
+    });
+
+    step();
+  };
+
+  tracks.forEach(initTrack);
+})();
+</script>

@@ -1,6 +1,9 @@
 ---
 title: Games
 type: landing
+build:
+  render: never
+  list: never
 
 design:
   spacing: '5rem'

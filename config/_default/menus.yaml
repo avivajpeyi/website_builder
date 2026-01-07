@@ -14,7 +14,7 @@ main:
     url: /publication/
     weight: 30
   - name: Games
-    url: /games/
+    url: /#games
     weight: 40
   - name: Contact
     url: /#contact
