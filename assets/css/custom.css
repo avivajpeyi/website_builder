@@ -1,0 +1,30 @@
+.hero-flocking {
+  position: relative;
+  isolation: isolate;
+}
+
+.hero-flocking #flocking-hero {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.7;
+  filter: saturate(1.15);
+}
+
+.hero-flocking #flocking-hero canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+}
+
+.hero-flocking .resume-biography {
+  position: relative;
+  z-index: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-flocking #flocking-hero {
+    display: none;
+  }
+}

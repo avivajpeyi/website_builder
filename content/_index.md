@@ -28,6 +28,7 @@ sections:
       background:
         gradient_mesh:
           enable: true
+      css_class: hero-flocking
 
       # Name heading sizing to accommodate long or short names
       name:

@@ -1,0 +1,289 @@
+{{ if .IsHome }}
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.9.2/lib/p5.min.js"></script>
+  <script>
+    (function () {
+      const section = document.querySelector('.hero-flocking');
+      if (!section || document.getElementById('flocking-hero')) {
+        return;
+      }
+
+      const motionQuery = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)');
+      if (motionQuery && motionQuery.matches) {
+        return;
+      }
+
+      const container = document.createElement('div');
+      container.id = 'flocking-hero';
+      container.setAttribute('aria-hidden', 'true');
+      section.prepend(container);
+
+      const boidCountFor = (width) => {
+        if (width >= 1200) return 120;
+        if (width >= 900) return 96;
+        if (width >= 720) return 80;
+        return 60;
+      };
+
+      const palette = ['#ff7a18', '#ffb347', '#ffd166', '#f7678a', '#5bc0eb'];
+
+      const sketch = (p) => {
+        let boids = [];
+        let bounds = { w: 1, h: 1 };
+        let pointer = null;
+        let isAttracting = false;
+        let pointerListenerAttached = false;
+
+        class Boid {
+          constructor() {
+            this.position = p.createVector(p.random(bounds.w), p.random(bounds.h));
+            const angle = p.random(p.TWO_PI);
+            this.velocity = p.createVector(Math.cos(angle), Math.sin(angle));
+            this.velocity.setMag(p.random(0.6, 2.2));
+            this.acceleration = p.createVector();
+            this.maxForce = 0.05;
+            this.maxSpeed = p.random(1.4, 2.6);
+            this.size = p.random(1.2, 2.4);
+            const color = p.color(palette[Math.floor(p.random(palette.length))]);
+            color.setAlpha(165);
+            this.stroke = color;
+          }
+
+          edges() {
+            if (this.position.x > bounds.w) this.position.x = 0;
+            if (this.position.x < 0) this.position.x = bounds.w;
+            if (this.position.y > bounds.h) this.position.y = 0;
+            if (this.position.y < 0) this.position.y = bounds.h;
+          }
+
+          align(boids) {
+            const perception = 45;
+            const steering = p.createVector();
+            let total = 0;
+            for (const other of boids) {
+              if (other === this) continue;
+              const d = p.dist(this.position.x, this.position.y, other.position.x, other.position.y);
+              if (d < perception) {
+                steering.add(other.velocity);
+                total += 1;
+              }
+            }
+            if (total > 0) {
+              steering.div(total);
+              steering.setMag(this.maxSpeed);
+              steering.sub(this.velocity);
+              steering.limit(this.maxForce);
+            }
+            return steering;
+          }
+
+          cohesion(boids) {
+            const perception = 60;
+            const steering = p.createVector();
+            let total = 0;
+            for (const other of boids) {
+              if (other === this) continue;
+              const d = p.dist(this.position.x, this.position.y, other.position.x, other.position.y);
+              if (d < perception) {
+                steering.add(other.position);
+                total += 1;
+              }
+            }
+            if (total > 0) {
+              steering.div(total);
+              steering.sub(this.position);
+              steering.setMag(this.maxSpeed);
+              steering.sub(this.velocity);
+              steering.limit(this.maxForce);
+            }
+            return steering;
+          }
+
+          separation(boids) {
+            const perception = 28;
+            const steering = p.createVector();
+            let total = 0;
+            for (const other of boids) {
+              if (other === this) continue;
+              const d = p.dist(this.position.x, this.position.y, other.position.x, other.position.y);
+              if (d > 0 && d < perception) {
+                const diff = p.createVector(
+                  this.position.x - other.position.x,
+                  this.position.y - other.position.y
+                );
+                diff.div(d * d);
+                steering.add(diff);
+                total += 1;
+              }
+            }
+            if (total > 0) {
+              steering.div(total);
+              steering.setMag(this.maxSpeed);
+              steering.sub(this.velocity);
+              steering.limit(this.maxForce);
+            }
+            return steering;
+          }
+
+          seek(target) {
+            const desired = p.createVector(target.x - this.position.x, target.y - this.position.y);
+            if (desired.mag() === 0) return p.createVector();
+            desired.setMag(this.maxSpeed);
+            const steering = desired.sub(this.velocity);
+            steering.limit(this.maxForce);
+            return steering;
+          }
+
+          repel(target) {
+            const desired = p.createVector(this.position.x - target.x, this.position.y - target.y);
+            const distance = desired.mag();
+            if (distance === 0) return p.createVector();
+            if (distance > 160) return p.createVector();
+            desired.setMag(this.maxSpeed);
+            const steering = desired.sub(this.velocity);
+            steering.limit(this.maxForce * 1.4);
+            return steering;
+          }
+
+          flock(boids, target) {
+            const alignment = this.align(boids).mult(1.0);
+            const cohesion = this.cohesion(boids).mult(0.85);
+            const separation = this.separation(boids).mult(1.35);
+            this.acceleration.add(alignment);
+            this.acceleration.add(cohesion);
+            this.acceleration.add(separation);
+            if (target && target.mode === 'repel') {
+              this.acceleration.add(this.repel(target).mult(0.9));
+            }
+            if (target && target.mode === 'attract') {
+              this.acceleration.add(this.seek(target).mult(0.65));
+            }
+          }
+
+          update() {
+            this.velocity.add(this.acceleration);
+            this.velocity.limit(this.maxSpeed);
+            this.position.add(this.velocity);
+            this.acceleration.mult(0);
+          }
+
+          render() {
+            const tail = this.velocity.copy().mult(-6);
+            p.stroke(this.stroke);
+            p.strokeWeight(this.size);
+            p.line(this.position.x, this.position.y, this.position.x + tail.x, this.position.y + tail.y);
+          }
+        }
+
+        const seedBoids = (count) => {
+          boids = [];
+          for (let i = 0; i < count; i += 1) {
+            boids.push(new Boid());
+          }
+        };
+
+        const adjustBoids = (count) => {
+          if (count > boids.length) {
+            for (let i = boids.length; i < count; i += 1) {
+              boids.push(new Boid());
+            }
+          } else if (count < boids.length) {
+            boids.length = count;
+          }
+        };
+
+        const resize = (width, height) => {
+          bounds = {
+            w: Math.max(1, Math.floor(width)),
+            h: Math.max(1, Math.floor(height)),
+          };
+          p.resizeCanvas(bounds.w, bounds.h);
+          adjustBoids(boidCountFor(bounds.w));
+        };
+
+        const updatePointer = (event) => {
+          const rect = section.getBoundingClientRect();
+          const touch = event.touches && event.touches[0];
+          const clientX = touch ? touch.clientX : event.clientX;
+          const clientY = touch ? touch.clientY : event.clientY;
+          const x = clientX - rect.left;
+          const y = clientY - rect.top;
+          if (x >= 0 && x <= rect.width && y >= 0 && y <= rect.height) {
+            pointer = { x, y, mode: isAttracting ? 'attract' : 'repel' };
+          } else {
+            pointer = null;
+          }
+        };
+
+        const clearPointer = () => {
+          pointer = null;
+        };
+
+        p.setup = () => {
+          const rect = section.getBoundingClientRect();
+          bounds = {
+            w: Math.max(1, Math.floor(rect.width)),
+            h: Math.max(1, Math.floor(rect.height)),
+          };
+          const canvas = p.createCanvas(bounds.w, bounds.h);
+          canvas.parent(container);
+          p.pixelDensity(1);
+          p.noFill();
+          p.strokeCap(p.ROUND);
+          seedBoids(boidCountFor(bounds.w));
+
+          if (!pointerListenerAttached) {
+            window.addEventListener('mousemove', updatePointer, { passive: true });
+            window.addEventListener('touchmove', updatePointer, { passive: true });
+            window.addEventListener('mousedown', () => {
+              isAttracting = true;
+              if (pointer) pointer.mode = 'attract';
+            });
+            window.addEventListener('mouseup', () => {
+              isAttracting = false;
+              if (pointer) pointer.mode = 'repel';
+            });
+            window.addEventListener(
+              'touchstart',
+              (event) => {
+                isAttracting = true;
+                updatePointer(event);
+              },
+              { passive: true }
+            );
+            window.addEventListener('touchend', clearPointer, { passive: true });
+            window.addEventListener('touchcancel', clearPointer, { passive: true });
+            pointerListenerAttached = true;
+          }
+        };
+
+        p.draw = () => {
+          p.clear();
+          for (const boid of boids) {
+            boid.flock(boids, pointer);
+            boid.update();
+            boid.edges();
+            boid.render();
+          }
+        };
+
+        if (window.ResizeObserver) {
+          const observer = new ResizeObserver((entries) => {
+            if (!entries.length) return;
+            const { width, height } = entries[0].contentRect;
+            resize(width, height);
+          });
+          observer.observe(section);
+        } else {
+          window.addEventListener('resize', () => {
+            const rect = section.getBoundingClientRect();
+            resize(rect.width, rect.height);
+          });
+        }
+      };
+
+      if (window.p5) {
+        new window.p5(sketch, container);
+      }
+    })();
+  </script>
+{{ end }}
