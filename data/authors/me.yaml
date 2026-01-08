@@ -38,6 +38,16 @@ profiles:
   - icon: document-text
     url: /uploads/resume.pdf
     label: CV
+links:
+  - icon: academicons/orcid
+    url: https://orcid.org/0000-0002-4146-1132
+    label: ORCID
+  - icon: brands/linkedin
+    url: https://www.linkedin.com/in/vajpeyi/
+    label: LinkedIn
+  - icon: brands/github
+    url: https://github.com/avivajpeyi
+    label: GitHub
 interests:
   - Gravitational-wave astrophysics
   - Bayesian inference

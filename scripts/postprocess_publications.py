@@ -19,6 +19,8 @@ def rewrite_publication(path: Path) -> bool:
     fm_raw, body = match.group(1), match.group(2)
     data = yaml.safe_load(fm_raw) or {}
 
+    updated = False
+
     doi = data.pop("doi", None)
     if doi:
         hugo = data.get("hugoblox") or {}
@@ -28,6 +30,24 @@ def rewrite_publication(path: Path) -> bool:
         ids.setdefault("doi", doi)
         hugo["ids"] = ids
         data["hugoblox"] = hugo
+        updated = True
+
+    authors = data.get("authors")
+    if isinstance(authors, list):
+        seen = set()
+        deduped = []
+        for author in authors:
+            if not isinstance(author, str):
+                deduped.append(author)
+                continue
+            key = " ".join(author.split()).strip()
+            if not key or key in seen:
+                continue
+            seen.add(key)
+            deduped.append(author)
+        if deduped != authors:
+            data["authors"] = deduped
+            updated = True
 
     new_fm = yaml.safe_dump(
         data,
@@ -37,7 +57,7 @@ def rewrite_publication(path: Path) -> bool:
     ).rstrip()
 
     path.write_text(f"---\n{new_fm}\n---\n{body}")
-    return doi is not None
+    return updated
 
 
 def main() -> None:

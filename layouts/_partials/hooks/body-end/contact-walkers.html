@@ -28,7 +28,7 @@
         section.style.position = 'relative';
       }
 
-      const palette = ['#ff7a18', '#ffb347', '#ffd166', '#f7678a', '#5bc0eb'];
+      const walkerColor = '#5bc0eb';
       const baseBg =
         getComputedStyle(document.body).backgroundColor || 'rgb(248, 244, 238)';
 
@@ -50,7 +50,7 @@
           maxSpeed: 1.2,
           minWeight: 1.1,
           maxWeight: 2.2,
-          trailLength: 42,
+          trailLength: 400,
         };
 
         const countFor = (width, height) => {
@@ -61,9 +61,9 @@
 
         const strokeField = {
           cellSize: 48,
-          decay: 0.92,
-          injectScale: 0.018,
-          maxStrength: 3,
+          decay: 0.95,
+          injectScale: 0.038,
+          maxStrength: 6.5,
         };
 
         class Particle {
@@ -76,8 +76,8 @@
             this.prev = this.pos.copy();
             this.speed = p.random(field.minSpeed, field.maxSpeed);
             this.weight = p.random(field.minWeight, field.maxWeight);
-            this.stroke = p.color(palette[Math.floor(p.random(palette.length))]);
-            this.stroke.setAlpha(110);
+            this.stroke = p.color(walkerColor);
+            this.stroke.setAlpha(40);
             this.history = [this.pos.copy()];
           }
 
@@ -114,7 +114,7 @@
             for (let i = 1; i < this.history.length; i += 1) {
               const prev = this.history[i - 1];
               const next = this.history[i];
-              const alpha = (i / this.history.length) * 110;
+              const alpha = (i / this.history.length) * 40;
               const color = p.color(this.stroke);
               color.setAlpha(alpha);
               p.stroke(color);
