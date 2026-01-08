@@ -2,7 +2,6 @@
 title: 'Deep follow-up of GW151226: ordinary binary or low-mass-ratio system?'
 authors:
 - Avi Vajpeyi
-- Avi Vajpeyi
 - Rory Smith
 - Eric Thrane
 date: '2022-01-01'
