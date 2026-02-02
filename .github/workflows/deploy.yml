@@ -2,7 +2,7 @@ name: Deploy website to GitHub Pages repo
 
 env:
   NODE_VERSION: '20'
-  HUGO_CACHEDIR: /tmp/hugo_cache_runner/
+  HUGO_CACHEDIR: /tmp/hugo_cache_runner
 
 on:
   push:
@@ -72,7 +72,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: resources/
-          key: ${{ runner.os }}-hugo-resources-${{ hashFiles('assets/**/*', 'config/**/*', 'data/**/*') }}
+          key: ${{ runner.os }}-hugo-resources-${{ hashFiles('assets/**/*', 'config/**/*', 'data/**/*', 'hugo.yaml') }}
           restore-keys: |
             ${{ runner.os }}-hugo-resources-
 
