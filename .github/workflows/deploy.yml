@@ -46,11 +46,15 @@ jobs:
           hugo-version: ${{ env.HUGO_VERSION }}
           extended: true
 
+      - name: Get Go module cache path
+        id: go-cache-path
+        run: echo "path=$(go env GOMODCACHE)" >> $GITHUB_OUTPUT
+
       - name: Cache Hugo modules
         uses: actions/cache@v4
         with:
           path: |
-            /home/runner/go/pkg/mod
+            ${{ steps.go-cache-path.outputs.path }}
             /tmp/hugo_cache_runner/
           key: ${{ runner.os }}-hugo-mod-${{ hashFiles('**/go.sum') }}
           restore-keys: |
@@ -68,7 +72,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: resources/
-          key: ${{ runner.os }}-hugo-resources-${{ hashFiles('content/**/*', 'assets/**/*', 'config/**/*') }}
+          key: ${{ runner.os }}-hugo-resources-${{ hashFiles('assets/**/*', 'config/**/*', 'data/**/*') }}
           restore-keys: |
             ${{ runner.os }}-hugo-resources-
 
