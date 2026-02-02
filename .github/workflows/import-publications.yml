@@ -33,7 +33,7 @@ jobs:
       - name: Checkout the repo
         uses: actions/checkout@v4
         with:
-          # Only need recent history for publication import
+          # Fetch-depth 1 for faster checkout during publication import
           fetch-depth: 1
 
       - name: Set up Python 3.13

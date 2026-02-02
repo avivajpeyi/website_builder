@@ -2,6 +2,7 @@ name: Deploy website to GitHub Pages repo
 
 env:
   NODE_VERSION: '20'
+  HUGO_CACHEDIR: /tmp/hugo_cache_runner/
 
 on:
   push:
@@ -45,20 +46,29 @@ jobs:
           hugo-version: ${{ env.HUGO_VERSION }}
           extended: true
 
-      - uses: actions/cache@v4
+      - name: Cache Hugo modules
+        uses: actions/cache@v4
         with:
           path: |
+            /home/runner/go/pkg/mod
             /tmp/hugo_cache_runner/
-            node_modules/
-            modules/*/node_modules/
-          key: ${{ runner.os }}-hugo-deps-${{ hashFiles('**/go.mod', '**/package-lock.json', '**/pnpm-lock.yaml') }}
+          key: ${{ runner.os }}-hugo-mod-${{ hashFiles('**/go.sum') }}
           restore-keys: |
-            ${{ runner.os }}-hugo-deps-
+            ${{ runner.os }}-hugo-mod-
 
-      - uses: actions/cache@v4
+      - name: Cache Node modules
+        uses: actions/cache@v4
+        with:
+          path: node_modules/
+          key: ${{ runner.os }}-node-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Cache Hugo resources
+        uses: actions/cache@v4
         with:
           path: resources/
-          key: ${{ runner.os }}-hugo-resources-${{ hashFiles('assets/**/*', 'config/**/*', 'hugo.yaml', 'package.json') }}
+          key: ${{ runner.os }}-hugo-resources-${{ hashFiles('content/**/*', 'assets/**/*', 'config/**/*') }}
           restore-keys: |
             ${{ runner.os }}-hugo-resources-
 
@@ -66,6 +76,7 @@ jobs:
         env:
           HUGO_ENVIRONMENT: production
           HUGO_BLOX_LICENSE: ${{ secrets.HUGO_BLOX_LICENSE }}
+          HUGO_CACHEDIR: ${{ env.HUGO_CACHEDIR }}
         run: |
           echo "Hugo Cache Dir: $(hugo config | grep cachedir)"
           hugo --minify
