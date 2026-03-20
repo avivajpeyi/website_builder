@@ -49,7 +49,7 @@ body {
   line-height: 1.78;
 }
 
-:where(.article-style, .prose, .home-section .max-w-prose, .home-section .prose) {
+:where(.article-style, .prose, .resume-biography, .home-section .max-w-prose, .home-section .prose) {
   max-width: var(--site-copy-width);
 }
 
@@ -95,8 +95,8 @@ body {
 
 .home-section {
   position: relative;
-  padding-top: clamp(4rem, 7vw, 6rem) !important;
-  padding-bottom: clamp(4rem, 7vw, 6rem) !important;
+  padding-top: var(--site-section-gap) !important;
+  padding-bottom: var(--site-section-gap) !important;
 }
 
 .home-section + .home-section::before {
@@ -131,13 +131,13 @@ body {
 }
 
 .hero-flocking #flocking-hero {
-  opacity: 0.46;
-  filter: saturate(0.9) blur(0.15px);
+  opacity: 0.18;
+  filter: saturate(0.75) blur(0.2px);
 }
 
 .contact-walkers #flocking-contact {
-  opacity: 0.34;
-  filter: saturate(0.82);
+  opacity: 0.12;
+  filter: saturate(0.7);
 }
 
 .hero-flocking #flocking-hero canvas,
@@ -151,6 +151,15 @@ body {
 .contact-walkers > :not(.home-section-bg):not(#flocking-contact) {
   position: relative;
   z-index: 1;
+}
+
+.hero-flocking .resume-biography {
+  background: color-mix(in srgb, var(--site-surface-strong) 92%, transparent);
+  border: 1px solid var(--site-border);
+  border-radius: clamp(1.4rem, 3vw, 2rem);
+  box-shadow: var(--site-shadow-md);
+  backdrop-filter: blur(12px);
+  padding: clamp(1.5rem, 4vw, 2.4rem);
 }
 
 .contact-walkers::before {
@@ -510,8 +519,12 @@ li.sm\:py-4 + li.sm\:py-4 {
 
 @media (max-width: 768px) {
   .home-section {
-    padding-top: clamp(3.5rem, 10vw, 4.75rem) !important;
-    padding-bottom: clamp(3.5rem, 10vw, 4.75rem) !important;
+    padding-top: clamp(4rem, 12vw, 5.5rem) !important;
+    padding-bottom: clamp(4rem, 12vw, 5.5rem) !important;
+  }
+
+  .hero-flocking .resume-biography {
+    padding: 1.25rem;
   }
 
   .pub-list-item {
