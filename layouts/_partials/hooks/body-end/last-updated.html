@@ -1,0 +1,11 @@
+<script>
+  (function () {
+    const footer = document.querySelector('footer');
+    if (!footer) return;
+    const note = document.createElement('p');
+    note.className = 'last-built-note';
+    note.style.cssText = 'text-align:center;font-size:0.75rem;opacity:0.5;margin:0.25rem 0 0;';
+    note.textContent = 'Last built: {{ now.UTC.Format "2 Jan 2006, 15:04 UTC" }}';
+    footer.appendChild(note);
+  })();
+</script>
