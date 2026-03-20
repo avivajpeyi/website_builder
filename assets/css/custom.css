@@ -49,7 +49,11 @@ body {
   line-height: 1.78;
 }
 
+<<<<<<< ours
 :where(.article-style, .prose, .resume-biography, .home-section .max-w-prose, .home-section .prose) {
+=======
+:where(.article-style, .prose, .home-section .max-w-prose, .home-section .prose) {
+>>>>>>> theirs
   max-width: var(--site-copy-width);
 }
 
@@ -95,8 +99,13 @@ body {
 
 .home-section {
   position: relative;
+<<<<<<< ours
   padding-top: var(--site-section-gap) !important;
   padding-bottom: var(--site-section-gap) !important;
+=======
+  padding-top: clamp(4rem, 7vw, 6rem) !important;
+  padding-bottom: clamp(4rem, 7vw, 6rem) !important;
+>>>>>>> theirs
 }
 
 .home-section + .home-section::before {
@@ -131,6 +140,7 @@ body {
 }
 
 .hero-flocking #flocking-hero {
+<<<<<<< ours
   opacity: 0.18;
   filter: saturate(0.75) blur(0.2px);
 }
@@ -138,6 +148,15 @@ body {
 .contact-walkers #flocking-contact {
   opacity: 0.12;
   filter: saturate(0.7);
+=======
+  opacity: 0.46;
+  filter: saturate(0.9) blur(0.15px);
+}
+
+.contact-walkers #flocking-contact {
+  opacity: 0.34;
+  filter: saturate(0.82);
+>>>>>>> theirs
 }
 
 .hero-flocking #flocking-hero canvas,
@@ -519,12 +538,17 @@ li.sm\:py-4 + li.sm\:py-4 {
 
 @media (max-width: 768px) {
   .home-section {
+<<<<<<< ours
     padding-top: clamp(4rem, 12vw, 5.5rem) !important;
     padding-bottom: clamp(4rem, 12vw, 5.5rem) !important;
   }
 
   .hero-flocking .resume-biography {
     padding: 1.25rem;
+=======
+    padding-top: clamp(3.5rem, 10vw, 4.75rem) !important;
+    padding-bottom: clamp(3.5rem, 10vw, 4.75rem) !important;
+>>>>>>> theirs
   }
 
   .pub-list-item {
