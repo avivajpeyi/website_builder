@@ -1,15 +1,36 @@
 <div
   class="github-heatmap-card js-github-heatmap"
-  data-source="https://raw.githubusercontent.com/avivajpeyi/avivajpeyi/main/assets/data/metrics.json"
+  data-source="https://raw.githubusercontent.com/avivajpeyi/avivajpeyi/main/assets/data/contributions.json"
   data-days="365"
 >
   <div class="github-heatmap-card__header">
     <h3 class="github-heatmap-card__title">Code Activity</h3>
-    <span class="github-heatmap-card__subtitle">Last 365 days</span>
   </div>
 
   <div class="github-heatmap-card__body">
     <div class="github-heatmap-status" role="status" aria-live="polite">Loading GitHub activity…</div>
+
+    <div class="github-heatmap-sonify" data-ready="false">
+      <button type="button" class="github-heatmap-sonify__play" data-action="toggle-play" disabled>
+        Play
+      </button>
+
+      <label class="github-heatmap-sonify__tempo">
+        <span>Tempo</span>
+        <input type="range" min="72" max="180" step="1" value="120" data-role="tempo" />
+        <span class="github-heatmap-sonify__tempo-value" data-role="tempo-value">120 BPM</span>
+      </label>
+
+      <div class="github-heatmap-sonify__tracks" role="group" aria-label="Sonification tracks">
+        <button type="button" class="github-heatmap-sonify__track" data-row="0" aria-pressed="true">Sun</button>
+        <button type="button" class="github-heatmap-sonify__track" data-row="1" aria-pressed="true">Mon</button>
+        <button type="button" class="github-heatmap-sonify__track" data-row="2" aria-pressed="true">Tue</button>
+        <button type="button" class="github-heatmap-sonify__track" data-row="3" aria-pressed="true">Wed</button>
+        <button type="button" class="github-heatmap-sonify__track" data-row="4" aria-pressed="true">Thu</button>
+        <button type="button" class="github-heatmap-sonify__track" data-row="5" aria-pressed="true">Fri</button>
+        <button type="button" class="github-heatmap-sonify__track" data-row="6" aria-pressed="true">Sat</button>
+      </div>
+    </div>
 
     <div class="github-heatmap-scroll">
       <div class="github-heatmap-months" aria-hidden="true"></div>
