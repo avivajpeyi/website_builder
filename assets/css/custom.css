@@ -1,31 +1,38 @@
-.hero-flocking {
+.hero-flocking,
+.contact-walkers {
   position: relative;
   isolation: isolate;
 }
 
-.hero-flocking #flocking-hero {
+.hero-flocking #flocking-hero,
+.contact-walkers #flocking-contact {
   position: absolute;
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  opacity: 0.7;
+}
+
+.hero-flocking #flocking-hero {
+  opacity: 0.72;
   filter: saturate(1.15);
 }
 
-.hero-flocking #flocking-hero canvas {
+.contact-walkers #flocking-contact {
+  opacity: 0.62;
+  filter: saturate(1.05);
+}
+
+.hero-flocking #flocking-hero canvas,
+.contact-walkers #flocking-contact canvas {
   width: 100% !important;
   height: 100% !important;
   display: block;
 }
 
-.hero-flocking .resume-biography {
+.hero-flocking .resume-biography,
+.contact-walkers > :not(.home-section-bg):not(#flocking-contact) {
   position: relative;
   z-index: 1;
-}
-
-.contact-walkers {
-  position: relative;
-  isolation: isolate;
 }
 
 .contact-walkers::before {
@@ -35,12 +42,9 @@
   z-index: 0;
   background: linear-gradient(
     135deg,
-    rgba(255, 122, 24, 0.18),
-    rgba(91, 192, 235, 0.16)
+    rgba(255, 122, 24, 0.12),
+    rgba(91, 192, 235, 0.1)
   );
-  background-size: 200% 200%;
-  opacity: 0.85;
-  animation: contactGradient 12s ease-in-out infinite;
   pointer-events: none;
 }
 
@@ -52,70 +56,15 @@
   top: -12vmin;
   right: -8vmin;
   z-index: 0;
-  background: radial-gradient(circle, rgba(247, 103, 138, 0.28), rgba(247, 103, 138, 0));
+  background: radial-gradient(circle, rgba(247, 103, 138, 0.22), rgba(247, 103, 138, 0));
   filter: blur(48px);
-  opacity: 0.7;
-  animation: contactPulse 9s ease-in-out infinite;
+  opacity: 0.6;
   pointer-events: none;
-}
-
-.contact-walkers #walkers-contact,
-.contact-walkers #flow-contact {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-  opacity: 0.7;
-}
-
-.contact-walkers #walkers-contact canvas,
-.contact-walkers #flow-contact canvas {
-  position: absolute;
-  inset: 0;
-  width: 100% !important;
-  height: 100% !important;
-  display: block;
-}
-
-.contact-walkers > :not(.home-section-bg):not(#walkers-contact):not(#flow-contact) {
-  position: relative;
-  z-index: 2;
-}
-
-@keyframes contactPulse {
-  0% {
-    transform: scale(0.98);
-    opacity: 0.55;
-  }
-  50% {
-    transform: scale(1.05);
-    opacity: 0.9;
-  }
-  100% {
-    transform: scale(0.98);
-    opacity: 0.55;
-  }
-}
-
-@keyframes contactGradient {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-flocking #flocking-hero {
-    display: none;
-  }
-
-  .contact-walkers #walkers-contact,
-  .contact-walkers #flow-contact {
+  .hero-flocking #flocking-hero,
+  .contact-walkers #flocking-contact {
     display: none;
   }
 }
