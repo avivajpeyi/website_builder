@@ -1,0 +1,53 @@
+<div
+  class="github-heatmap-card js-github-heatmap"
+  data-source="https://raw.githubusercontent.com/avivajpeyi/avivajpeyi/main/assets/data/metrics.json"
+  data-days="365"
+>
+  <div class="github-heatmap-card__header">
+    <p class="github-heatmap-card__eyebrow">GitHub activity</p>
+    <div>
+      <h3 class="github-heatmap-card__title">Code Activity</h3>
+      <p class="github-heatmap-card__subtitle">Year in Review</p>
+    </div>
+    <p class="github-heatmap-card__description">
+      A contribution heatmap is a better long-view signal than random commit titles: it highlights consistency, deep-work bursts, and momentum across the year.
+    </p>
+  </div>
+
+  <div class="github-heatmap-card__body">
+    <div class="github-heatmap-status" role="status" aria-live="polite">Loading GitHub activity…</div>
+
+    <div class="github-heatmap-scroll">
+      <div class="github-heatmap-months" aria-hidden="true"></div>
+      <div class="github-heatmap-grid-wrap">
+        <div class="github-heatmap-weekdays" aria-hidden="true">
+          <span>Sun</span>
+          <span>Mon</span>
+          <span>Tue</span>
+          <span>Wed</span>
+          <span>Thu</span>
+          <span>Fri</span>
+          <span>Sat</span>
+        </div>
+        <div
+          class="github-heatmap-grid"
+          role="grid"
+          aria-label="GitHub contribution heatmap for the last 365 days"
+        ></div>
+      </div>
+    </div>
+
+    <div class="github-heatmap-legend" aria-hidden="true">
+      <span>Less</span>
+      <span class="github-heatmap-legend__swatch" data-level="0"></span>
+      <span class="github-heatmap-legend__swatch" data-level="1"></span>
+      <span class="github-heatmap-legend__swatch" data-level="2"></span>
+      <span class="github-heatmap-legend__swatch" data-level="3"></span>
+      <span class="github-heatmap-legend__swatch" data-level="4"></span>
+      <span>More</span>
+    </div>
+  </div>
+
+  <div class="github-heatmap-tooltip" role="tooltip" hidden></div>
+</div>
+<script defer src="/js/heatmap-engine.js"></script>
