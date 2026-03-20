@@ -64,6 +64,14 @@ sections:
       show_pattern: true
       scroll_speed: 0.4
   - block: markdown
+    id: github-activity
+    content:
+      title: ''
+      text: |-
+        {{< github-heatmap >}}
+    design:
+      css_class: github-activity-section
+  - block: markdown
     id: contact
     content:
       title: Contact
