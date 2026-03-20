@@ -1,6 +1,6 @@
 (() => {
   const SOURCE_CACHE = new Map();
-  const GITHUB_PALETTE = ['#ebedf0', '#9be9a8', '#40c463', '#30a14e', '#216e39'];
+  const GITHUB_PALETTE = ['#161b22', '#9be9a8', '#40c463', '#30a14e', '#216e39'];
   const LEVEL_BY_COLOR = new Map(GITHUB_PALETTE.map((color, index) => [color.toLowerCase(), index]));
   const APPROXIMATE_COUNT_BY_LEVEL = [0, 1, 4, 8, 12];
   const DATE_FORMATTER = new Intl.DateTimeFormat('en', {
@@ -58,6 +58,7 @@
   function buildCalendar(daysToShow, sourceDays) {
     const today = new Date();
     const todayUtc = new Date(Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), today.getUTCDate()));
+    const todayWeekday = todayUtc.getUTCDay();
     const startDate = new Date(todayUtc);
     startDate.setUTCDate(startDate.getUTCDate() - (daysToShow - 1));
 
@@ -74,11 +75,12 @@
       const level = matched?.level ?? 0;
       const count = matched?.count ?? 0;
       const exactCount = Boolean(matched?.exactCount && matched?.date === isoDate);
+      const daysFromEnd = daysToShow - 1 - index;
 
       return {
         date: isoDate,
         weekday,
-        weekIndex: Math.floor(index / 7),
+        weekIndex: 52 - Math.ceil(Math.max(0, daysFromEnd - todayWeekday) / 7),
         level,
         color: GITHUB_PALETTE[level],
         count,
