@@ -68,3 +68,197 @@
     display: none;
   }
 }
+
+.github-activity-section .article-style {
+  max-width: none;
+}
+
+.github-heatmap-card {
+  position: relative;
+  border-radius: 1.5rem;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 20px 45px rgba(15, 23, 42, 0.08);
+  backdrop-filter: blur(12px);
+  padding: clamp(1.25rem, 2vw, 1.75rem);
+  overflow: hidden;
+}
+
+.dark .github-heatmap-card {
+  border-color: rgba(255, 255, 255, 0.1);
+  background: rgba(24, 24, 27, 0.88);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.24);
+}
+
+.github-heatmap-card__header {
+  display: grid;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.github-heatmap-card__eyebrow,
+.github-heatmap-card__subtitle,
+.github-heatmap-status,
+.github-heatmap-legend,
+.github-heatmap-weekdays,
+.github-heatmap-months {
+  color: rgb(113 113 122);
+}
+
+.dark .github-heatmap-card__eyebrow,
+.dark .github-heatmap-card__subtitle,
+.dark .github-heatmap-status,
+.dark .github-heatmap-legend,
+.dark .github-heatmap-weekdays,
+.dark .github-heatmap-months {
+  color: rgb(161 161 170);
+}
+
+.github-heatmap-card__eyebrow {
+  margin: 0;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.github-heatmap-card__title {
+  margin: 0;
+  font-size: clamp(1.4rem, 2vw, 1.8rem);
+  line-height: 1.1;
+}
+
+.github-heatmap-card__subtitle,
+.github-heatmap-card__description,
+.github-heatmap-status,
+.github-heatmap-legend {
+  margin: 0;
+}
+
+.github-heatmap-card__description {
+  max-width: 65ch;
+}
+
+.github-heatmap-card__body {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.github-heatmap-scroll {
+  overflow-x: auto;
+  padding-bottom: 0.25rem;
+}
+
+.github-heatmap-months,
+.github-heatmap-grid {
+  display: grid;
+  grid-template-columns: repeat(53, 12px);
+  column-gap: 4px;
+}
+
+.github-heatmap-months {
+  margin-left: 2.25rem;
+  margin-bottom: 0.4rem;
+  font-size: 0.72rem;
+}
+
+.github-heatmap-grid-wrap {
+  display: flex;
+  gap: 0.55rem;
+  align-items: flex-start;
+}
+
+.github-heatmap-weekdays {
+  display: grid;
+  grid-template-rows: repeat(7, 12px);
+  row-gap: 4px;
+  min-width: 1.7rem;
+  font-size: 0.72rem;
+  line-height: 12px;
+}
+
+.github-heatmap-grid {
+  grid-template-rows: repeat(7, 12px);
+  row-gap: 4px;
+}
+
+.github-heatmap-cell,
+.github-heatmap-legend__swatch {
+  width: 12px;
+  height: 12px;
+  border: 0;
+  border-radius: 3px;
+  padding: 0;
+  appearance: none;
+}
+
+.github-heatmap-cell {
+  cursor: pointer;
+  transition: transform 120ms ease, box-shadow 120ms ease, opacity 120ms ease;
+}
+
+.github-heatmap-cell:hover,
+.github-heatmap-cell:focus-visible {
+  transform: scale(1.18);
+  box-shadow: 0 0 0 2px rgba(15, 23, 42, 0.14);
+  outline: none;
+}
+
+.dark .github-heatmap-cell:hover,
+.dark .github-heatmap-cell:focus-visible {
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.24);
+}
+
+.github-heatmap-legend {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.82rem;
+}
+
+.github-heatmap-legend__swatch[data-level='0'] { background: #ebedf0; }
+.github-heatmap-legend__swatch[data-level='1'] { background: #9be9a8; }
+.github-heatmap-legend__swatch[data-level='2'] { background: #40c463; }
+.github-heatmap-legend__swatch[data-level='3'] { background: #30a14e; }
+.github-heatmap-legend__swatch[data-level='4'] { background: #216e39; }
+
+.github-heatmap-tooltip {
+  position: absolute;
+  z-index: 5;
+  max-width: min(18rem, calc(100vw - 2rem));
+  padding: 0.55rem 0.7rem;
+  border-radius: 0.75rem;
+  background: rgba(15, 23, 42, 0.94);
+  color: white;
+  font-size: 0.8rem;
+  line-height: 1.35;
+  pointer-events: none;
+  transform: translate(-50%, -100%);
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.2);
+}
+
+@media (max-width: 640px) {
+  .github-heatmap-card {
+    padding: 1rem;
+  }
+
+  .github-heatmap-months,
+  .github-heatmap-grid {
+    grid-template-columns: repeat(53, 10px);
+  }
+
+  .github-heatmap-grid {
+    grid-template-rows: repeat(7, 10px);
+  }
+
+  .github-heatmap-weekdays {
+    grid-template-rows: repeat(7, 10px);
+    line-height: 10px;
+  }
+
+  .github-heatmap-cell,
+  .github-heatmap-legend__swatch {
+    width: 10px;
+    height: 10px;
+  }
+}
