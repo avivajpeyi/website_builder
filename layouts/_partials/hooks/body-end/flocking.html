@@ -1,9 +1,11 @@
 {{ if .IsHome }}
   <script>
-    (function () {
-      if (!window.p5) {
+    window.__initHomepageBoids = window.__initHomepageBoids || function () {
+      if (window.__homepageBoidsStarted || !window.p5) {
         return;
       }
+
+      window.__homepageBoidsStarted = true;
 
       const motionQuery = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)');
       if (motionQuery && motionQuery.matches) {
@@ -350,6 +352,10 @@
 
         createBoidSketch(section, container, config);
       }
-    })();
+    };
+
+    if (window.p5) {
+      window.__initHomepageBoids();
+    }
   </script>
 {{ end }}
