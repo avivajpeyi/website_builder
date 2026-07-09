@@ -26,7 +26,7 @@ jobs:
 
       - name: Download latest CV PDF and check for changes
         run: |
-          curl -fsSL -o /tmp/cv.pdf https://raw.githubusercontent.com/avivajpeyi/cv/main/cv.pdf
+          curl -fsSL -o /tmp/cv.pdf https://raw.githubusercontent.com/avivajpeyi/cv/pdf/cv.pdf
           if [ ! -s /tmp/cv.pdf ]; then
             echo "::error::Downloaded CV PDF is empty"
             exit 1
