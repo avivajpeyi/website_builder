@@ -6,7 +6,7 @@ authors:
 - Maria Luisa Chiofalo
 - Patricia Schmidt
 - Rhiannon P. Udall
-- Avi Vajpeji
+- Avi Vajpeyi
 - Charlie Hoy
 date: '2023-04-01'
 publishDate: '2026-01-06T20:56:47.766150Z'

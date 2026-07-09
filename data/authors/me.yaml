@@ -84,17 +84,72 @@ skills:
       - name: Bayesian inference
         percent: 95
         icon: chart-bar
-      - name: Gravitational-wave modeling
+      - name: Gravitational-wave data analysis
         percent: 90
         icon: globe-alt
-  - name: Creative Tech
+      - name: Simulation-based inference
+        percent: 80
+        icon: beaker
+  - name: Programming
     items:
-      - name: Python & Julia
-        percent: 90
+      - name: Python (NumPy/SciPy/JAX)
+        percent: 95
         icon: code-bracket
-      - name: Godot / Unity
+      - name: C/C++ & CUDA
         percent: 75
-        icon: puzzle-piece
+        icon: cpu-chip
+      - name: HPC (Slurm/PBS)
+        percent: 80
+        icon: server
+awards:
+  - title: Research Training Program (RTP) Stipend
+    date: '2022-12-31'
+    awarder: Australian Government
+    summary: |
+      PhD stipend scholarship (~AUD $28K), 2019–2022.
+  - title: Monash Tuition Scholarship
+    date: '2022-12-31'
+    awarder: Monash University
+    summary: |
+      Full PhD tuition scholarship (~AUD $49K), 2019–2022.
+  - title: Commencement Speaker
+    date: '2018-06-01'
+    awarder: The College of Wooster
+    summary: |
+      Selected as the student commencement speaker for the graduating class.
+  - title: The Jonas O. Notestein Prize
+    date: '2018-06-01'
+    awarder: The College of Wooster
+    summary: |
+      Awarded for the highest GPA in the graduating class.
+  - title: The Arthur H. Compton Prize in Physics
+    date: '2018-06-01'
+    awarder: The College of Wooster
+    summary: |
+      Awarded for the highest standing in physics.
+  - title: NCAA Academic Honor Roll
+    date: '2017-12-01'
+    awarder: National Collegiate Athletic Association
+  - title: 'MCURCSM 2017: Best Paper Presentation'
+    date: '2017-10-01'
+    awarder: Midstates Conference for Undergraduate Research
+  - title: 'Honour Societies: Phi Beta Kappa & Pi Mu Epsilon'
+    date: '2017-06-01'
+    awarder: The College of Wooster
+  - title: Academic Prizes in Physics
+    date: '2017-06-01'
+    awarder: The College of Wooster
+    summary: |
+      Edward Taylor Prize, Joseph Albertus Culler Prize in Physics, and
+      Elias Compton Freshman Prize.
+  - title: Dean's List and Scholarship
+    date: '2018-06-01'
+    awarder: The College of Wooster
+    summary: |
+      Awarded every year, 2014–2018.
+  - title: Basic Mountaineering Certificate
+    date: '2012-12-01'
+    awarder: Himalayan Mountaineering Institute
 languages:
   - name: English
     percent: 100
