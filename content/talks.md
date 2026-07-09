@@ -10,7 +10,7 @@ sections:
   - block: markdown
     id: talks
     content:
-      title: Talks & Presentations
+      title: Invited & Conference Talks
       text: |-
         Selected invited talks, seminars, and conference presentations. Slides
         and recordings are linked where available.
@@ -33,6 +33,27 @@ sections:
         - **OzGrav Retreat** — *A high-mass black hole search* (Nov 2019)
         - **Mount Burnett Observatory** — *GPU computing in astronomy* (Feb 2019)
 
-        ### 2018
-        - **Google I/O Extended (Bronx)** — *"Icebreakers" tech demo* (Jul 2018)
+  - block: markdown
+    id: outreach
+    content:
+      title: Public Engagement & Outreach
+      text: |-
+        Bringing gravitational-wave science to the public through talks, festivals,
+        and observatory events.
+
+        {{< youtube ULhmrVJuA3A >}}
+
+        - **Auckland Astronomical Society** — *Celestial Songs: A Cosmic Spacetime Symphony*, guest lecture at Stardome Observatory (Aug 2025) — [recording](https://www.youtube.com/watch?v=ULhmrVJuA3A)
+        - **Raising the Bar, Auckland** — *Celestial Songs: A Cosmic Spacetime Symphony*, Auckland Fish Market (Aug 2024) — [event](https://www.rtbevent.com/avi-vajpeyi) · [podcast](https://on.soundcloud.com/RmtkF1HNNLwW8B8X8)
+        - **Future Me, Auckland** — *Thump in the Night: statistics and the hunt for black holes* (Jun 2024)
+        - **MOTAT STEM Fair** — public engagement event (2025)
+        - **Pint of Science, Melbourne** — *Black Holes: The Ultimate Snitches* (2019–2022)
+
+  - block: markdown
+    id: media
+    content:
+      title: Media & Interviews
+      text: |-
+        - **RNZ (Radio New Zealand)** — *The science of space sounds*, interview (Aug 2024) — [listen](https://www.rnz.co.nz/national/programmes/nights/audio/2018951839/the-science-of-space-sounds)
+        - **95bFM — Ready Steady Learn** — radio interview (Aug 2024) — [listen](https://95bfm.com/bcast/ready-steady-learn-w-avi-vajpeyi-august-13-2024)
 ---
