@@ -36,7 +36,7 @@ profiles:
     url: https://avivajpeyi.itch.io/
     label: Games on Itch.io
   - icon: document-text
-    url: /uploads/resume.pdf
+    url: https://raw.githubusercontent.com/avivajpeyi/cv/pdf/cv.pdf
     label: CV
 links:
   - icon: academicons/orcid

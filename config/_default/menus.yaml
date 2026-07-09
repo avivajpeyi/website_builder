@@ -23,5 +23,5 @@ main:
     url: /#contact
     weight: 60
   - name: CV
-    url: /uploads/resume.pdf
+    url: https://raw.githubusercontent.com/avivajpeyi/cv/pdf/cv.pdf
     weight: 70
