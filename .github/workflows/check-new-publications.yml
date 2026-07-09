@@ -1,0 +1,50 @@
+name: Check for New Publications
+
+# Checks ORCID and Semantic Scholar for papers not yet in publications.bib
+# and opens a PR with draft bibtex stubs. Review and clean up author names /
+# titles before merging - merging triggers the existing "Import Publications
+# From Bibtex" workflow, which turns entries into website pages.
+
+permissions:
+  contents: write
+  pull-requests: write
+
+on:
+  schedule:
+    - cron: '0 0 1 * *' # first of every month
+  workflow_dispatch:
+
+concurrency:
+  group: check-new-publications
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Check ORCID / Semantic Scholar for new publications
+        run: python scripts/check_new_publications.py
+
+      - name: Create Pull Request
+        id: cpr
+        uses: peter-evans/create-pull-request@v6
+        with:
+          commit-message: 'chore(publications): add candidate entries from ORCID/Semantic Scholar'
+          title: 'New publications found - review before merging'
+          body: |
+            Found via ORCID and Semantic Scholar that aren't in `publications.bib` yet.
+
+            These are draft stubs - check titles, author name formatting, and journal
+            info before merging. Merging will trigger the bibtex-to-markdown import.
+          base: main
+          labels: automated-pr, publications, needs-review
+          branch: check-new-publications
+          delete-branch: true
+          draft: true

@@ -1,0 +1,53 @@
+name: Sync CV PDF
+
+# Pulls the freshly compiled cv.pdf from github.com/avivajpeyi/cv (built by
+# that repo's own "Build CV" workflow) into static/uploads/resume.pdf, so the
+# website's CV download link never drifts from the LaTeX source of truth.
+
+permissions:
+  contents: write
+  pull-requests: write
+
+on:
+  schedule:
+    - cron: '0 0 * * 1' # weekly, Monday
+  workflow_dispatch:
+
+concurrency:
+  group: sync-cv-pdf
+  cancel-in-progress: true
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download latest CV PDF and check for changes
+        run: |
+          curl -fsSL -o /tmp/cv.pdf https://raw.githubusercontent.com/avivajpeyi/cv/main/cv.pdf
+          if [ ! -s /tmp/cv.pdf ]; then
+            echo "::error::Downloaded CV PDF is empty"
+            exit 1
+          fi
+          if ! cmp -s /tmp/cv.pdf static/uploads/resume.pdf; then
+            cp /tmp/cv.pdf static/uploads/resume.pdf
+            echo "changed=true" >> "$GITHUB_ENV"
+          else
+            echo "changed=false" >> "$GITHUB_ENV"
+          fi
+
+      - name: Create Pull Request
+        if: env.changed == 'true'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          commit-message: 'chore(cv): sync latest compiled CV PDF'
+          title: 'Sync latest CV PDF from avivajpeyi/cv'
+          body: |
+            Pulls the freshly compiled `cv.pdf` from [avivajpeyi/cv](https://github.com/avivajpeyi/cv)
+            (built by that repo's own CI) into `static/uploads/resume.pdf`.
+          base: main
+          labels: automated-pr, content
+          branch: sync-cv-pdf
+          delete-branch: true
