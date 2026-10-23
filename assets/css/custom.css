@@ -1,7 +1,120 @@
+.software-section {
+  width: min(100% - 3rem, 72rem);
+  margin-inline: auto;
+}
+
+.software-section > h2 {
+  margin: 0 0 1rem;
+  font-size: clamp(1.75rem, 3vw, 2.25rem);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.software-section__intro {
+  max-width: 65ch;
+  margin-bottom: 2rem;
+  line-height: 1.65;
+}
+
+.software-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
+  gap: 1.5rem;
+  margin-block: 1.5rem;
+}
+
+.software-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: clamp(1.25rem, 3vw, 2rem);
+  border: 1px solid #d4d4d8;
+  border-radius: 1rem;
+  background: #fff;
+  color: #27272a;
+  overflow-wrap: anywhere;
+}
+
+.software-card h3 {
+  margin: 0.5rem 0;
+  color: inherit;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.software-card p {
+  margin: 0 0 1rem;
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+.software-card .software-card__focus,
+.software-card .software-card__stack {
+  color: #52525b;
+  font-size: 0.875rem;
+}
+
+.software-card .software-card__focus {
+  margin-bottom: 0;
+  font-weight: 600;
+}
+
+.software-card__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+  margin-top: auto;
+  padding-top: 0.5rem;
+}
+
+.software-card__links a,
+.software-section__more a {
+  display: inline-block;
+  padding-block: 0.5rem;
+  color: #9a3412;
+  font-size: 1rem;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.software-card__links a:focus-visible,
+.software-section__more a:focus-visible {
+  outline: 3px solid currentColor;
+  outline-offset: 4px;
+  border-radius: 0.15rem;
+}
+
+.dark .software-card {
+  border-color: #52525b;
+  background: #18181b;
+  color: #f4f4f5;
+}
+
+.dark .software-card .software-card__focus,
+.dark .software-card .software-card__stack {
+  color: #d4d4d8;
+}
+
+.dark .software-card__links a,
+.dark .software-section__more a {
+  color: #fdba74;
+}
+
+@media (max-width: 767px) {
+  .software-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
 .hero-flocking,
 .contact-walkers {
   position: relative;
   isolation: isolate;
+}
+
+.contact-walkers {
+  overflow: clip;
 }
 
 .hero-flocking #flocking-hero,

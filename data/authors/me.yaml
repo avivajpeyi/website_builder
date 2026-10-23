@@ -13,7 +13,14 @@ postnominals:
 status:
   icon: ""
 role: "Postdoctoral Research Fellow"
-bio: "Avi works on Bayesian inference for gravitational-wave astrophysics. He is a postdoctoral research fellow at the University of Auckland, working with Prof. Renate Meyer. His research spans LVK parameter estimation and Bayesian noise modeling for LISA."
+bio: |-
+  I translate statistical methods into usable research software for noisy time-series data.
+  I work with Python, JAX and NumPyro to build Bayesian inference tools, with tests,
+  diagnostics and examples that connect the methods to their use.
+
+  I am a Postdoctoral Research Fellow at the University of Auckland, working with
+  Prof. Renate Meyer. My research spans LVK parameter estimation and Bayesian noise
+  modelling for LISA.
 affiliations:
   - name: "University of Auckland"
     url: "https://www.auckland.ac.nz/"
@@ -49,6 +56,7 @@ links:
     url: https://github.com/avivajpeyi
     label: GitHub
 interests:
+  - Research software & noisy time series
   - Gravitational-wave astrophysics
   - Bayesian inference
   - Creative coding & game jams

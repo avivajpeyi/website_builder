@@ -1,7 +1,7 @@
 ---
 # Leave the homepage title empty to use the site title
 title: ''
-summary: ''
+summary: 'Bayesian inference and research software for noisy time series, with Python and JAX.'
 date: 2022-10-24
 type: landing
 
@@ -17,10 +17,10 @@ sections:
       text: ''
       # Show a call-to-action button under your biography? (optional)
       button:
-        text: Download CV
-        url: https://raw.githubusercontent.com/avivajpeyi/cv/pdf/cv.pdf
+        text: Explore software
+        url: /software/
       headings:
-        about: ''
+        about: 'Statistical methods, usable software'
         education: ''
         interests: ''
     design:
@@ -38,6 +38,11 @@ sections:
       avatar:
         size: medium # Options: small (150px), medium (200px, default), large (320px), xl (400px), xxl (500px)
         shape: circle # Options: circle (default), square, rounded
+  - block: software
+    id: software
+    content:
+      title: Research software
+      text: Python and JAX tools for Bayesian inference and time-series analysis. These collaborative projects connect statistical methods to documented, testable code.
   - block: collection
     id: selected-publications
     content:
@@ -54,7 +59,7 @@ sections:
     content:
       title: Games & Experiments
       text: >-
-        In my spare time, I work on game development and human–machine learning projects. This includes reinforcement learning in games and unconventional control schemes (e.g. webcam-based tracking).
+        I also build games and interactive experiments in my spare time, exploring reinforcement learning and unconventional controls such as webcam tracking. They are another way I turn ideas into playable software.
       logo_folder: games
       cta:
         text: See all games on itch.io

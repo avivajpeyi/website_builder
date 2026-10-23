@@ -5,8 +5,11 @@
 
 main:
   - name: Home
-    url: /#about
+    url: /
     weight: 10
+  - name: Software
+    url: /software/
+    weight: 15
   - name: Posts
     url: /posts/
     weight: 20

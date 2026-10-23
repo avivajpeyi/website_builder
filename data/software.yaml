@@ -1,0 +1,17 @@
+- id: logpsplinepsd
+  name: LogPSplinePSD
+  focus: Bayesian spectral estimation
+  stack: Python · JAX · NumPyro · ArviZ
+  summary: Estimate noise spectra and correlations in time-series data, with posterior uncertainty and diagnostic plots.
+  contribution: I added scalar variational inference and sampler controls, with tests and worked notebooks.
+  source: https://github.com/nz-gravity/LogPSplinePSD/
+  evidence: https://github.com/nz-gravity/LogPSplinePSD/commit/0e5c087fef211a7a89765b77220c651e83bb5f8e
+  case_study: /project/logpsplinepsd/
+- id: wdm
+  name: wdm-transform
+  focus: Differentiable time-frequency analysis
+  stack: Python · NumPy · JAX
+  summary: Transform sampled signals between time, frequency and Wilson–Daubechies–Meyer representations for signal analysis.
+  contribution: I added modified Gaussian windows and compact subbands, with JAX implementations, reconstruction and gradient tests, and a window-selection guide.
+  source: https://github.com/pywavelet/wdm_transform/
+  evidence: https://github.com/pywavelet/wdm_transform/commit/b563b0c6fb0e9b217fcb4297a9183a5a82e05e0c

@@ -5,8 +5,9 @@ hugoblox:
     type: person
     tagline: Postdoctoral Research Fellow | University of Auckland
     description: |-
-      I work on Bayesian inference for gravitational-wave astrophysics.
-      My research spans LVK parameter estimation and Bayesian noise modeling for LISA.
+      Postdoctoral Research Fellow at the University of Auckland, translating statistical
+      methods into research software with Python and JAX. Bayesian inference for noisy
+      time series, gravitational-wave astrophysics and LISA noise modelling.
   theme:
     mode: system
     pack: default

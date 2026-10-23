@@ -1,5 +1,15 @@
 # Website builder
 
+## Local checks
+
+Use the Hugo Extended version pinned in `hugoblox.yaml`, then run `npm ci`,
+`npm run lint` and `npm run build`. Lint checks Hugo configuration parsing and
+Git whitespace errors; the build validates templates and generates the Pagefind
+search index. Preview with `npm run dev`.
+
+Featured software summaries and contribution links are maintained in
+`data/software.yaml` and shared by the homepage and `/software/`.
+
 
 This website was initialised with:
 npx hugoblox create site --template academic-cv

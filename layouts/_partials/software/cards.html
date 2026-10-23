@@ -1,0 +1,16 @@
+<div class="software-grid">
+  {{ range site.Data.software }}
+  <article class="software-card" aria-labelledby="project-{{ .id }}">
+    <p class="software-card__focus">{{ .focus }}</p>
+    <h3 id="project-{{ .id }}">{{ .name }}</h3>
+    <p class="software-card__stack">{{ .stack }}</p>
+    <p>{{ .summary }}</p>
+    <p><strong>My contribution:</strong> {{ .contribution }}</p>
+    <nav class="software-card__links" aria-label="{{ .name }} links">
+      {{ with .case_study }}<a href="{{ . | relURL }}">Read case study <span aria-hidden="true">→</span></a>{{ end }}
+      <a href="{{ .source }}">Source code</a>
+      <a href="{{ .evidence }}">Contribution evidence</a>
+    </nav>
+  </article>
+  {{ end }}
+</div>
