@@ -7,8 +7,8 @@ Use the Hugo Extended version pinned in `hugoblox.yaml`, then run `npm ci`,
 Git whitespace errors; the build validates templates and generates the Pagefind
 search index. Preview with `npm run dev`.
 
-Featured software summaries and contribution links are maintained in
-`data/software.yaml` and shared by the homepage and `/software/`.
+Featured software summaries and source links are maintained in
+`data/software.yaml` and displayed on the homepage.
 
 
 This website was initialised with:

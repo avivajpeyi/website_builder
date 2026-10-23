@@ -17,8 +17,8 @@ sections:
       text: ''
       # Show a call-to-action button under your biography? (optional)
       button:
-        text: Explore software
-        url: /software/
+        text: Download CV
+        url: https://raw.githubusercontent.com/avivajpeyi/cv/pdf/cv.pdf
       headings:
         about: 'Statistical methods, usable software'
         education: ''
@@ -42,7 +42,7 @@ sections:
     id: software
     content:
       title: Research software
-      text: Python and JAX tools for Bayesian inference and time-series analysis. These collaborative projects connect statistical methods to documented, testable code.
+      text: Tools for Bayesian spectral estimation and time-frequency analysis.
   - block: collection
     id: selected-publications
     content:

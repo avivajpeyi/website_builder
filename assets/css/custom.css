@@ -68,8 +68,7 @@
   padding-top: 0.5rem;
 }
 
-.software-card__links a,
-.software-section__more a {
+.software-card__links a {
   display: inline-block;
   padding-block: 0.5rem;
   color: #9a3412;
@@ -78,8 +77,7 @@
   text-underline-offset: 0.2em;
 }
 
-.software-card__links a:focus-visible,
-.software-section__more a:focus-visible {
+.software-card__links a:focus-visible {
   outline: 3px solid currentColor;
   outline-offset: 4px;
   border-radius: 0.15rem;
@@ -96,8 +94,7 @@
   color: #d4d4d8;
 }
 
-.dark .software-card__links a,
-.dark .software-section__more a {
+.dark .software-card__links a {
   color: #fdba74;
 }
 
