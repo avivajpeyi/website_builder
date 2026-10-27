@@ -18,7 +18,4 @@ publication: '*Physical Review D*'
 hugoblox:
   ids:
     doi: 10.1103/48ck-2fff
-links:
-- name: URL
-  url: http://dx.doi.org/10.1103/48ck-2fff
 ---

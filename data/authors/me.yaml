@@ -63,7 +63,7 @@ interests:
 education:
   - area: PhD Astrophysics
     institution: Monash University
-    date_start: 2018-01-01
+    date_start: 2019-01-01
     date_end: 2022-12-31
     summary: |
       Bayesian inference for gravitational-wave populations.
@@ -74,12 +74,19 @@ education:
     summary: |
       Graduated with departmental honors in both majors.
 work:
-  - position: Postdoctoral Research Fellow
+  - position: Postdoctoral Research Fellow (Statistics)
     company_name: University of Auckland
     company_url: https://www.auckland.ac.nz/
-    date_start: 2023-01-01
+    date_start: "2026"
     summary: |
-      Developing simulation-based inference pipelines for the LIGO-Virgo-KAGRA Collaboration and mentoring student researchers.
+      Bayesian noise modelling and evidence estimation, working with Prof. Renate Meyer.
+  - position: Postdoctoral Research Fellow (Physics)
+    company_name: University of Auckland
+    company_url: https://www.auckland.ac.nz/
+    date_start: "2023"
+    date_end: "2026"
+    summary: |
+      Gravitational-wave data analysis for the LVK and LISA; mentoring student researchers.
   - position: Member / Data Analyst
     company_name: LIGO-Virgo-KAGRA Collaboration
     company_url: https://www.ligo.org/

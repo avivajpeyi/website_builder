@@ -20,9 +20,6 @@ publishDate: '2026-07-09T01:16:44.762874Z'
 publication_types:
 - article-journal
 publication: '*Granular Matter*'
-links:
-- name: URL
-  url: http://dx.doi.org/10.1007/s10035-021-01188-1
 hugoblox:
   ids:
     doi: 10.1007/s10035-021-01188-1

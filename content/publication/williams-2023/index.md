@@ -16,7 +16,4 @@ publication: '*Journal of Open Source Software*'
 hugoblox:
   ids:
     doi: 10.21105/joss.04170
-links:
-- name: URL
-  url: http://dx.doi.org/10.21105/joss.04170
 ---

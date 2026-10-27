@@ -10,7 +10,7 @@ permissions:
 on:
   push:
     branches: ['main']
-    paths: ['publications.bib']
+    paths: ['publications.bib', 'scripts/import_publications.py', 'scripts/postprocess_publications.py']
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -32,7 +32,7 @@ jobs:
       pull-request-operation: ${{ steps.cpr.outputs.pull-request-operation }}
 
     env:
-      ACADEMIC_VERSION: '>=0.10.0'
+      ACADEMIC_VERSION: '==0.11.2'
       PYTHON_VERSION: '3.12'
     steps:
       - name: Checkout the repo
@@ -73,7 +73,7 @@ jobs:
         if: ${{ hashFiles('publications.bib') != '' }}
         run: |
           echo "🚀 Starting publication import..."
-          academic import publications.bib content/publication/ --compact --verbose
+          python scripts/import_publications.py
           echo "✅ Publication import completed successfully"
           
           # Verify that files were created
@@ -92,7 +92,9 @@ jobs:
         id: cpr
         uses: peter-evans/create-pull-request@v6
         with:
-          add-paths: content/publication/
+          add-paths: |
+            content/publication/
+            static/uploads/publications.bib
           commit-message: 'feat(publications): import latest publications from bibtex'
           title: 'HugoBlox Kit - Import latest publications from Bibtex'
           body: |
@@ -159,7 +161,7 @@ jobs:
           fetch-depth: 0
 
       - name: Verify only generated publication pages changed
-        run: git diff --exit-code origin/main...HEAD -- . ':!content/publication/'
+        run: git diff --exit-code origin/main...HEAD -- . ':!content/publication/' ':!static/uploads/publications.bib'
 
       - name: Setup Node.js
         uses: actions/setup-node@v4

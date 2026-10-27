@@ -1,7 +1,6 @@
 ---
-title: 'Bayesian inference for compact binary coalescences with <scp>bilby</scp>:
-  validation and application to the first LIGO–Virgo gravitational-wave transient
-  catalogue'
+title: 'Bayesian inference for compact binary coalescences with bilby: validation
+  and application to the first LIGO–Virgo gravitational-wave transient catalogue'
 authors:
 - I M Romero-Shaw
 - C Talbot
@@ -70,7 +69,4 @@ publication: '*Monthly Notices of the Royal Astronomical Society*'
 hugoblox:
   ids:
     doi: 10.1093/mnras/staa2850
-links:
-- name: URL
-  url: http://dx.doi.org/10.1093/mnras/staa2850
 ---

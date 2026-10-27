@@ -15,12 +15,21 @@ sections:
         Selected invited talks, seminars, and conference presentations. Slides
         and recordings are linked where available.
 
+        ### 2026
+        - **[2026 International Training Workshop on Frontiers from Quanta to Cosmos Physics (FQCP2026)](https://indico.ictp-ap.ucas.ac.cn/event/5/overview), ICTP-AP / UCAS, Beijing** — delivered a training lecture for Master's and PhD students on Bayesian parameter estimation for compact binary coalescences in LIGO and LISA (Aug–Sep 2026).
+        - **[2nd New Horizons for Psi Workshop, Beijing](https://indico.ictp-ap.ucas.ac.cn/event/3/timetable/?view=standard)** — *Accelerated Bayesian noise estimation for multivariate and non-stationary LISA data* (25 Aug 2026).
+
         ### 2025
         - **BayesComp 2025** — *Bayesian computation in astrophysics* (invited session)
+        - **10th AUT Mathematical Modelling and Analytics Symposium** — *Multivariate time-series spectral analysis with splines* (Nov 2025); applications to EEG, financial, and astrophysical data
 
         ### 2024
         - **COMPAS Meeting** — *Active machine learning with deep GPs for COMPAS population inference* (Nov 2024)
         - **Flatiron Institute** — *Mind the Gaps: time–frequency approaches for analysing LISA data with gaps* (Jul 2024)
+
+        ### 2023
+        - **NZ Summer School on Gravitational Waves** — instruction on Bayesian parameter estimation for compact-binary inspiral signals (Feb 2023)
+        - **NZ Gravity Workshop, University of Canterbury** — *Parallelization Techniques*, one-hour tutorial (Aug 2023)
 
         ### 2021
         - **LIGO Rates & Populations** — *Measuring properties of AGN disks from binary black hole gravitational waves* (Oct 2021)
