@@ -1,12 +1,12 @@
 # Hugo Blox GitHub Action to convert Bibtex publications to Markdown-based webpages
 name: Import Publications From Bibtex
 
-# Require permission to create a PR (least privilege principle)
+# Require permission to create and merge generated publication PRs.
 permissions:
   contents: write
   pull-requests: write
 
-# Run workflow when a `.bib` file is added or updated in the `data/` folder
+# Run when the reviewed bibliography changes.
 on:
   push:
     branches: ['main']
@@ -18,13 +18,18 @@ on:
 # Prevent concurrent runs of this workflow
 concurrency:
   group: import-publications-${{ github.ref }}
-  cancel-in-progress: true
+  # Let a successful merge reach the deployment dispatch before another run starts.
+  cancel-in-progress: false
 
 jobs:
   hugoblox:
-    if: github.repository_owner != 'HugoBlox'
+    if: github.repository_owner != 'HugoBlox' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    outputs:
+      pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
+      pull-request-head-sha: ${{ steps.cpr.outputs.pull-request-head-sha }}
+      pull-request-operation: ${{ steps.cpr.outputs.pull-request-operation }}
 
     env:
       ACADEMIC_VERSION: '>=0.10.0'
@@ -87,12 +92,16 @@ jobs:
         id: cpr
         uses: peter-evans/create-pull-request@v6
         with:
+          add-paths: content/publication/
           commit-message: 'feat(publications): import latest publications from bibtex'
           title: 'HugoBlox Kit - Import latest publications from Bibtex'
           body: |
             🔄 **Automated Publication Import**
 
             This PR automatically imports the latest publications from `publications.bib` to `content/publication/`.
+
+            The import workflow builds the website, merges this PR on success,
+            and starts deployment automatically.
 
             **Changes:**
             - 📚 Updated publication entries
@@ -124,3 +133,67 @@ jobs:
             echo "❌ Workflow failed - check logs for details"
             exit 1
           fi
+
+  validate-and-merge:
+    needs: hugoblox
+    if: >-
+      needs.hugoblox.outputs.pull-request-number != '' &&
+      needs.hugoblox.outputs.pull-request-operation != 'closed'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write
+      pull-requests: write
+      actions: write
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+      PR_NUMBER: ${{ needs.hugoblox.outputs.pull-request-number }}
+      PR_HEAD_SHA: ${{ needs.hugoblox.outputs.pull-request-head-sha }}
+      HUGO_CACHEDIR: /tmp/hugo_cache_runner
+    steps:
+      - name: Check out the generated PR commit
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.hugoblox.outputs.pull-request-head-sha }}
+          fetch-depth: 0
+
+      - name: Verify only generated publication pages changed
+        run: git diff --exit-code origin/main...HEAD -- . ':!content/publication/'
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Get Hugo Version
+        run: |
+          VERSION=$(awk '/hugo_version:/ {gsub(/[\047\042]/, "", $2); print $2}' hugoblox.yaml)
+          echo "HUGO_VERSION=$VERSION" >> "$GITHUB_ENV"
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: ${{ env.HUGO_VERSION }}
+          extended: true
+
+      - name: Install website dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Lint and build the generated website
+        env:
+          HUGO_ENVIRONMENT: production
+          HUGO_BLOX_LICENSE: ${{ secrets.HUGO_BLOX_LICENSE }}
+        run: |
+          npm run lint
+          npm run build
+
+      - name: Merge the validated publication import
+        run: gh pr merge "$PR_NUMBER" --squash --match-head-commit "$PR_HEAD_SHA"
+
+      # A merge using GITHUB_TOKEN does not trigger the normal push workflow.
+      - name: Deploy the merged website
+        run: gh workflow run deploy.yml --ref main
