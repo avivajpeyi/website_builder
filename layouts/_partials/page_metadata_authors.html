@@ -4,7 +4,11 @@
   {{ range $index, $author := .Params.authors }}
     {{- if gt $index 0 }}, {{ end -}}
     <span>
-      {{- $author -}}
+      {{- if findRE `(?i)\bvajpeyi\b` $author -}}
+        <strong class="font-bold">{{ $author }}</strong>
+      {{- else -}}
+        {{- $author -}}
+      {{- end -}}
     </span>
     {{- if isset $.Params "author_notes" -}}
       {{- with (index $.Params.author_notes $index) -}}
