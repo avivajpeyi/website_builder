@@ -1,0 +1,22 @@
+{{/* Select small author lists with an individual Vajpeyi credit. */}}
+{{ $selected := slice }}
+{{ $maxAuthors := int site.Params.publications.max_authors }}
+{{ $year := now.Year }}
+{{ $firstYear := 0 }}
+{{ with .recent_years }}
+  {{ $firstYear = sub $year (sub (int .) 1) }}
+{{ end }}
+{{ range .pages }}
+  {{ $authors := .Params.authors | default slice }}
+  {{ $namedAuthor := false }}
+  {{ range $authors }}
+    {{ if or (eq . "me") (findRE `(?i)\bvajpeyi\b` .) }}
+      {{ $namedAuthor = true }}
+    {{ end }}
+  {{ end }}
+  {{ $recent := or (eq $firstYear 0) (and (ge .Date.Year $firstYear) (le .Date.Year $year)) }}
+  {{ if and $namedAuthor (le (len $authors) $maxAuthors) $recent }}
+    {{ $selected = $selected | append . }}
+  {{ end }}
+{{ end }}
+{{ return (sort $selected "Date" "desc") }}

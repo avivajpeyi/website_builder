@@ -1,0 +1,24 @@
+{{ $block := .wcBlock }}
+{{ $years := int $block.content.recent_years }}
+{{ $year := now.Year }}
+{{ $firstYear := sub $year (sub $years 1) }}
+{{ $pages := partial "publications/filter.html" (dict
+  "pages" (where site.RegularPages "Section" "publication")
+  "recent_years" $years
+) }}
+
+<div class="flex flex-col items-center max-w-prose mx-auto gap-3 justify-center px-6 md:px-0">
+  <h2 class="mb-6 text-3xl font-bold text-gray-900 dark:text-white">{{ $block.content.title }}</h2>
+  <p class="mb-6">{{ $firstYear }}–{{ $year }}</p>
+</div>
+
+<div class="flex flex-col items-center px-6">
+  {{ partial "views/citation--start.html" . }}
+  {{ range $pages }}
+    {{ partial "views/citation.html" (dict "item" .) }}
+  {{ else }}
+    <p>No publications from these years yet.</p>
+  {{ end }}
+  {{ partial "views/citation--end.html" . }}
+  <a class="mt-6 underline" href="{{ "publication/" | relLangURL }}">View all publications</a>
+</div>

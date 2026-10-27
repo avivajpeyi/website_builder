@@ -25,8 +25,14 @@ The wrapper refreshes bibliographic metadata and `cite.bib`, keeps existing
 slugs, prose, summaries, images and custom links, and generates the downloadable
 `static/uploads/publications.bib`. Do not edit the download separately. It
 rejects duplicate keys, DOIs, arXiv IDs and normalised titles. Running it again
-with unchanged input leaves the output unchanged. The listing at `/publication/`
-includes every publication bundle in reverse date order without pagination.
+with unchanged input leaves the output unchanged.
+
+The listing at `/publication/` shows papers with at most 10 authors that name
+Vajpeyi individually, in reverse date order without pagination. The cutoff is
+configured in `config/_default/params.yaml` under `publications.max_authors`.
+The homepage uses the same selection, limited to the current and previous
+calendar years at build time (`recent_years: 2` in `content/_index.md`). The
+complete bibliography remains available through the download and the CV.
 
 This repository (`website_builder`) is the current source. `dev_site` is
 archived; `.github/workflows/deploy.yml` publishes generated HTML to

@@ -43,17 +43,11 @@ sections:
     content:
       title: Research software
       text: Tools for Bayesian spectral estimation and time-frequency analysis.
-  - block: collection
+  - block: publications
     id: selected-publications
     content:
-      title: Selected Publications
-      text: 
-      filters:
-        folders:
-          - publication
-    design:
-      view: citation
-      columns: 2
+      title: Recent Publications
+      recent_years: 2
   - block: logos
     id: games
     content:

@@ -9,7 +9,7 @@
 
 {{ $view := .Params.view | default "card" }}
 {{ $block := . }}
-{{ $pages := .Pages.ByDate.Reverse }}
+{{ $pages := partial "publications/filter.html" (dict "pages" .RegularPages) }}
 {{ $config := dict
   "columns" (.Params.columns | default 2)
   "len" (len $pages)

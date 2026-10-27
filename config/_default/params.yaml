@@ -1,3 +1,6 @@
+publications:
+  max_authors: 10
+
 hugoblox:
   schema: "2.0"
   identity:
