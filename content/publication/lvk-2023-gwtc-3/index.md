@@ -10,9 +10,6 @@ publishDate: '2026-07-09T01:16:44.800129Z'
 publication_types:
 - article-journal
 publication: '*Physical Review X*'
-links:
-- name: URL
-  url: http://dx.doi.org/10.1103/PhysRevX.13.041039
 hugoblox:
   ids:
     doi: 10.1103/PhysRevX.13.041039

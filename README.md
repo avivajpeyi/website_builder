@@ -7,6 +7,32 @@ Use the Hugo Extended version pinned in `hugoblox.yaml`, then run `npm ci`,
 Git whitespace errors; the build validates templates and generates the Pagefind
 search index. Preview with `npm run dev`.
 
+## Publications
+
+`publications.bib` at the repository root is the maintained bibliography.
+After editing it, use the existing Academic importer through the preserving
+wrapper (Python 3.12, matching CI):
+
+```bash
+python -m pip install 'academic==0.11.2' pyyaml
+python scripts/import_publications.py
+python scripts/postprocess_publications.py
+npm run lint
+npm run build
+```
+
+The wrapper refreshes bibliographic metadata and `cite.bib`, keeps existing
+slugs, prose, summaries, images and custom links, and generates the downloadable
+`static/uploads/publications.bib`. Do not edit the download separately. It
+rejects duplicate keys, DOIs, arXiv IDs and normalised titles. Running it again
+with unchanged input leaves the output unchanged. The listing at `/publication/`
+includes every publication bundle in reverse date order without pagination.
+
+This repository (`website_builder`) is the current source. `dev_site` is
+archived; `.github/workflows/deploy.yml` publishes generated HTML to
+`avivajpeyi/avivajpeyi.github.io`. The website's CV links use the full academic
+CV's stable `cv/pdf/cv.pdf` URL.
+
 Featured software summaries and source links are maintained in
 `data/software.yaml` and displayed on the homepage.
 

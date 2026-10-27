@@ -16,9 +16,6 @@ publishDate: '2026-07-09T01:16:44.863452Z'
 publication_types:
 - article-journal
 publication: '*Physical Review Letters*'
-links:
-- name: URL
-  url: http://dx.doi.org/10.1103/PhysRevLett.126.081101
 hugoblox:
   ids:
     doi: 10.1103/PhysRevLett.126.081101

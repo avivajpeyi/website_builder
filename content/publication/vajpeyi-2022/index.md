@@ -20,7 +20,4 @@ publication: '*Monthly Notices of the Royal Astronomical Society*'
 hugoblox:
   ids:
     doi: 10.1093/mnras/stac2332
-links:
-- name: URL
-  url: http://dx.doi.org/10.1093/mnras/stac2332
 ---

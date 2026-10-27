@@ -7,7 +7,7 @@ authors:
 - Willem van Straten
 - Renate Meyer
 - Sergei Gulyaev
-date: '2026-04-01'
+date: '2026-04-10'
 publishDate: '2026-01-06T20:56:47.737182Z'
 publication_types:
 - article-journal
@@ -22,7 +22,4 @@ tags:
 - Data Analysis
 - Statistics and Probability (physics.data-an)
 - 'FOS: Physical sciences'
-links:
-- name: arXiv
-  url: https://arxiv.org/abs/2512.10283
 ---

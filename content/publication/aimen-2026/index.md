@@ -23,7 +23,4 @@ tags:
 - Computation (stat.CO)
 - 'FOS: Physical sciences'
 - 'FOS: Computer and information sciences'
-links:
-- name: arXiv
-  url: https://arxiv.org/abs/2510.00533
 ---

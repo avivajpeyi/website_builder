@@ -10,9 +10,6 @@ publishDate: '2026-07-09T01:16:44.884544Z'
 publication_types:
 - manuscript
 publication: '*Zenodo*'
-links:
-- name: URL
-  url: http://dx.doi.org/10.5281/zenodo.5142601
 hugoblox:
   ids:
     doi: 10.5281/zenodo.5142601
