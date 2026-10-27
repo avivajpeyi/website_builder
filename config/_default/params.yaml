@@ -8,9 +8,8 @@ hugoblox:
     type: person
     tagline: Postdoctoral Research Fellow | University of Auckland
     description: |-
-      Postdoctoral Research Fellow at the University of Auckland, translating statistical
-      methods into research software with Python and JAX. Bayesian inference for noisy
-      time series, gravitational-wave astrophysics and LISA noise modelling.
+      Avi Vajpeyi, postdoctoral researcher at the University of Auckland. Bayesian
+      inference for gravitational-wave data and research software in Python and JAX.
   theme:
     mode: system
     pack: default

@@ -20,7 +20,7 @@ sections:
         text: Download CV
         url: https://raw.githubusercontent.com/avivajpeyi/cv/pdf/cv.pdf
       headings:
-        about: 'Statistical methods, usable software'
+        about: 'About me'
         education: ''
         interests: ''
     design:
@@ -53,7 +53,7 @@ sections:
     content:
       title: Games & Experiments
       text: >-
-        I also build games and interactive experiments in my spare time, exploring reinforcement learning and unconventional controls such as webcam tracking. They are another way I turn ideas into playable software.
+        I make games in my spare time.
       logo_folder: games
       cta:
         text: See all games on itch.io

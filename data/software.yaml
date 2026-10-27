@@ -8,5 +8,5 @@
   name: wdm-transform
   focus: Differentiable time-frequency analysis
   stack: Python · NumPy · JAX
-  summary: Transform sampled signals between time, frequency and Wilson–Daubechies–Meyer representations for signal analysis.
+  summary: NumPy and JAX implementations of the Wilson–Daubechies–Meyer transform.
   source: https://github.com/pywavelet/wdm_transform/

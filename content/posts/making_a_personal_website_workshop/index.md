@@ -43,7 +43,7 @@ By the end of this workshop, you all should have a website but may need to spend
 > - https://jsonresume.org/
 
 
-One can now use [netlify](https://wowchemy.com/docs/getting-started/hugo-cms/) and [Hugo]'s "CMS" (whatever that stands for) to make a website without using git. However, I have not tried this yet, so I can't help you with it. :sweat_smile:
+You can also use [Netlify](https://wowchemy.com/docs/getting-started/hugo-cms/) and [Hugo]'s CMS to make a website without using Git.
 
 
 

@@ -47,9 +47,6 @@ sections:
     content:
       title: Public Engagement & Outreach
       text: |-
-        Bringing gravitational-wave science to the public through talks, festivals,
-        and observatory events.
-
         {{< youtube ULhmrVJuA3A >}}
 
         - **Auckland Astronomical Society** — *Celestial Songs: A Cosmic Spacetime Symphony*, guest lecture at Stardome Observatory (Aug 2025) — [recording](https://www.youtube.com/watch?v=ULhmrVJuA3A)

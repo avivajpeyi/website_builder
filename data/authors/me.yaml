@@ -14,13 +14,10 @@ status:
   icon: ""
 role: "Postdoctoral Research Fellow"
 bio: |-
-  I translate statistical methods into usable research software for noisy time-series data.
-  I work with Python, JAX and NumPyro to build Bayesian inference tools, with tests,
-  diagnostics and examples that connect the methods to their use.
-
-  I am a Postdoctoral Research Fellow at the University of Auckland, working with
-  Prof. Renate Meyer. My research spans LVK parameter estimation and Bayesian noise
-  modelling for LISA.
+  I’m a postdoctoral researcher at the University of Auckland, working with
+  Prof. Renate Meyer. My research focuses on Bayesian inference for gravitational-wave
+  data, including parameter estimation and noise modelling for LISA. I develop
+  research software in Python and JAX.
 affiliations:
   - name: "University of Auckland"
     url: "https://www.auckland.ac.nz/"
@@ -97,24 +94,18 @@ skills:
   - name: Research
     items:
       - name: Bayesian inference
-        percent: 95
         icon: chart-bar
       - name: Gravitational-wave data analysis
-        percent: 90
         icon: globe-alt
       - name: Simulation-based inference
-        percent: 80
         icon: beaker
   - name: Programming
     items:
       - name: Python (NumPy/SciPy/JAX)
-        percent: 95
         icon: code-bracket
       - name: C/C++ & CUDA
-        percent: 75
         icon: cpu-chip
       - name: HPC (Slurm/PBS)
-        percent: 80
         icon: server
 awards:
   - title: Research Training Program (RTP) Stipend
